@@ -12,8 +12,8 @@ $(document).ready(function() {
 });
 
 ('use strict');
-var apiPaths = 'https://love-sense.herokuapp.com/api/v1/';
-var myHome = 'https://www.lovesense.online/admin/index.html';
+var apiPaths = 'https://streaming-audio-library.herokuapp.com/api/v1/';
+var myHome = 'https://www.lovesense.online/main/admin/index.html';
 
 // love-sense
 

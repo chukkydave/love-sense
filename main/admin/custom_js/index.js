@@ -29,7 +29,7 @@ function login_user() {
 	});
 
 	if (blank_dey == 'yes') {
-		$('invalid-feedback').show();
+		// $('invalid-feedback').show();
 		return;
 	}
 
@@ -43,7 +43,7 @@ function login_user() {
 		dataType: 'json',
 		data: JSON.stringify(dataD),
 		cache: false,
-		url: 'https://love-sense.herokuapp.com/api/v1/admin',
+		url: 'https://streaming-audio-library.herokuapp.com/api/v1/admin/login',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -58,8 +58,9 @@ function login_user() {
 				localStorage.setItem('token', result.token);
 				localStorage.setItem('user_name', result.user.name);
 				localStorage.setItem('user_email', result.user.email);
+				localStorage.setItem('user_phone', result.user.phone_number);
 				setTimeout(() => {
-					window.location.href = 'https://www.lovesense.online/admin/dashboard.html';
+					window.location.href = 'https://www.lovesense.online/main/admin/dashboard.html';
 				}, 2000);
 				// checkLoggedin();
 			} else {
