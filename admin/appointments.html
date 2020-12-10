@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Love Sense - Admin</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/css/app.min.css">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+  <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
+  <link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+</head>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar sticky">
+        <div class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+             collapse-btn"> <i data-feather="menu"></i></a></li>
+
+           </ul>
+         </div>
+         <ul class="navbar-nav navbar-right">
+          <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
+            <i data-feather="maximize"></i>
+          </a></li>
+
+
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+            class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
+            class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+            <div class="dropdown-menu dropdown-menu-right pullDown">
+              <div class="dropdown-title">Hello <span id="namey1"></span></div>
+              <a href="profile.html" class="dropdown-item has-icon"> <i class="far
+                fa-user"></i> Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+              class="logo-name">Love Sense</span>
+            </a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="assets/img/user.png">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name" id="user-name1"></div>
+              <div class="user-role">Administrator</div>
+              <div class="sidebar-userpic-btn">
+
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <!-- <li class="menu-header">Main</li> -->
+            <li class="dropdown">
+              <a href="dashboard.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            </li>
+            <li class="dropdown">
+              <a class="nav-link" href="contacts.html"><i data-feather="message-square"></i><span>Contacts</span></a>
+            </li>
+            <li class="dropdown active">
+              <a class="nav-link" href="appointments.html"><i data-feather="clock"></i><span>Appointments</span></a>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                data-feather="settings"></i><span>Settings</span></a>
+                <ul class="dropdown-menu" style="display: none;">
+                  <li><a href="settings-admins.html">Admins</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </aside>
+        </div>
+        <!-- Main Content -->
+        <div class="main-content">
+
+
+          <section class="section">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title m-b-0">Appointments</h4>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="index.html">
+                  <i data-feather="home"></i></a>
+                </li>
+                <li class="breadcrumb-item">appointments</li>
+              </ul>
+              <div class="section-body">
+                <div class="row mt-4">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4>All Appointments</h4>
+                      </div>
+                      <div class="card-body">
+
+                        <div class="float-right">
+                          <form>
+                            <div class="input-group">
+                              <input type="text" class="form-control" id="filterNamey" placeholder="Search">
+
+                            </div>
+                          </form>
+                        </div>
+                        <div class="clearfix mb-3"></div>
+                        <div class="table-responsive">
+                          <i style="" id="appModal" class="fa fa-3x fa-spin fa-spinner"></i>
+                          <table class="table table-striped" id="appTable" style="display: none;">
+                            <thead>
+
+                              <th width="5%">#</th>
+                              <th width="20%">Name</th>
+                              <th width="10%">Phone</th>
+                              <th width="20%">Email</th>
+                              <th width="20%">Service</th>
+                              <th width="20%">Date and Time</th>
+                              <th width="5%">Action</th>
+                            </thead>
+                            <tbody id='appointment_body'>
+
+
+                            </tbody>
+                          </table>
+
+                        </div>
+                        <div class="float-right">
+                          <div class="container">
+                            <nav aria-label="Page navigation">
+                              <ul class="pagination" id="pagination"></ul>
+                            </nav>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="formModal">Edit Audio</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" value="Audio 1">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Author</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" value="Pastor ND">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea type="text" rows="4" class="form-control" placeholder="Not more than 50 characrters"
+                        value="The first coming of International representatives to Enugu, hosted by Kingdom diplomats"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="date" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control selectric" multiple="">
+                          <option value="">--Select--</option>
+                          <option selected>Faith</option>
+                          <option selected>Hope</option>
+                          <option>Love</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div id="image-preview" class="image-preview" style="background-image: url(assets/img/user.png);">
+                          <label for="image-upload" id="image-label">Choose File</label>
+                          <input type="file" name="image" id="image-upload" />
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="form-group text-left">
+                      <button type="submit" class="btn btn-lg btn-primary">
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <footer class="main-footer">
+          <div class="footer-left">
+            2020 <div class="bullet"></div> Design By <a href="#">PoeInternational</a>
+          </div>
+          <div class="footer-right">
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- General JS Scripts -->
+    <script src="assets/js/app.min.js"></script>
+    <!-- JS Libraies -->
+    <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
+    <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
+    <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
+    <script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="assets/js/page/create-post.js"></script>
+    <!-- Page Specific JS File -->
+    <script src="assets/js/page/advance-table.js"></script>
+    <!-- Template JS File -->
+    <script src="assets/js/scripts.js"></script>
+    <!-- Custom JS File -->
+    <script src="assets/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js" integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA==" crossorigin="anonymous"></script>
+    <script>
+      $('#filterNamey').on('keyup', function () {
+        var value = $(this).val().toLowerCase();
+        $('#appointment_body tr').filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+        $('.loadySef').hide()
+      });
+
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        listAppointment(1);
+        $(document).on("click", ".deleteMe a", function () {
+          let particularId = $(this).attr("id")
+          if (confirm('Click OK to Delete Booking')) deleteGroup(particularId); return false
+
+        })
+      })
+      
+
+      function listAppointment(page) {
+        var token1 = localStorage.getItem('token')
+        var page_limit = 10;
+
+
+        $.ajax({
+          type: 'GET',
+          dataType: 'json',
+          cache: false,
+          url: `${apiPaths}view/bookings/${page}/${page_limit}`,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': token1
+          },
+          success: (res) => {
+
+
+            if (res.status == 200) {
+
+              if (res.adminrecords.length > 0) {
+
+                let contact_table = "";
+                if (page == 1 || page == "") {
+                  var k = 1;
+                } else {
+
+                  var k = (page * page_limit) - page_limit + 1;
+                }
+
+                $(res.adminrecords).each((index, value) => {
+                  let datePro = moment(value.date, 'YYYY-MM-DD');
+                  let addedDate = datePro.format("MMM Do YYYY")
+                  var time = value.time;
+                  var formatted = moment(time, "HH:mm:ss").format("hh:mm A");
+                  let thisId = value._id;
+                  contact_table += `<tr id="app_${value._id}">`;
+                  contact_table += '<td>' + k++ + '</td>';
+                  contact_table += '<td>' + value.first_name + ' ' + value.last_name + '</td>';
+                  contact_table += '<td>' + value.phone + '</td>';
+                  contact_table += '<td>' + value.email + '</td>';
+                  contact_table += '<td>' + value.service + '</td>';
+                  contact_table += '<td>' + addedDate + ' '+ formatted + '</td>';
+                  contact_table += `<td><div class="dropdown d-inline mr-2">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Actions
+                  </button>
+                  <div class="dropdown-menu deleteMe" style="will-change: transform;">
+
+                  <a class="dropdown-item" id="${value._id}">Delete</a>
+
+                  </div>
+                  </div></td>`
+
+                  contact_table += '</tr>';
+                  contact_table += `<tr style="display:none" id="appModal_${value._id}" class="loadySef"><td colspan="6"><i class="fa fa-3x fa-spin fa-spinner"></i></td></tr>`
+
+
+
+                });
+
+                k++
+                $('#appointment_body').html(contact_table);
+                $('#appModal').hide()
+                $('#appTable').show()
+
+              }
+
+
+
+              if (res.totalPages) {
+                $('#pagination').twbsPagination({
+                  totalPages: res.totalPages,
+                  visiblePages: 10,
+                  onPageClick: function (event, page) {
+                    listAppointment(page);
+                  }
+                });
+
+              }
+            }else{
+              $('#appointment_body').html(`<tr class="even"> <td class=" " colspan="6">Error Fetching Result</td></tr>`);
+              $('#appModal').hide()
+              $('#appTable').show()
+            }
+
+
+
+
+          },
+          error: (res) => {
+            $('#appointment_body').html(`<tr class="even"> <td class=" " colspan="6">Error Fetching Result</td></tr>`);
+            $('#appModal').hide()
+            $('#appTable').show()
+          }
+        });
+      };
+
+
+
+
+
+      function deleteGroup(idex) {
+        var token2 = localStorage.getItem('token');
+        if (idex != "") {
+          $(`#app_${idex}`).hide()
+          $(`#appModal_${idex}`).show()
+          $.ajax({
+            type: "DELETE",
+            dataType: "json",
+            url: `${apiPaths}del/booking/${idex}`,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': token2
+            },
+            success: function (res) {
+              if (res.status == 200) {
+                alert("Booking delete successful")
+                listAppointment(1)
+
+              }else{
+                alert('Delete Error')
+                $(`#appModal_${idex}`).hide()
+                $(`#app_${idex}`).show()
+              }
+            },
+            error: function(res){
+              alert('Delete Error')
+              $(`#appModal_${idex}`).hide()
+              $(`#app_${idex}`).show()
+            }
+
+          });
+        } else {
+          alert("Cannot Delete on an Empty Value");
+        }
+
+      }
+
+
+
+
+    </script>
+  </body>
+
+
+
+  </html>
