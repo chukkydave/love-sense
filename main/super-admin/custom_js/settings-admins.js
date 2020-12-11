@@ -70,8 +70,7 @@ function listAdmins(page) {
                                 </button>
                                 <div class="dropdown-menu deleteMe"
                                 style="will-change: transform;">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModaledit"
-                                href="#">Edit</a>
+                                
                                 
                                 <a style="cursor:pointer;" class="dropdown-item deleteUs" id="${value._id}" 
                                 >Delete</a>
@@ -82,7 +81,8 @@ function listAdmins(page) {
 						contact_table += '</tr>';
 						contact_table += `<tr style="display:none" id="adminModal_${value._id}" class="loadySef"><td colspan="4"><i class="fa fa-3x fa-spin fa-spinner"></i></td></tr>`;
 					});
-
+					// <a class="dropdown-item" data-toggle="modal" data-target="#exampleModaledit"
+					//         href="#">Edit</a>
 					k++;
 
 					$('#admin_body').html(contact_table);
@@ -169,6 +169,43 @@ $('.toggle-password').click(function() {
 	}
 });
 
+function viewAdmin(idex) {
+	var token2 = localStorage.getItem('token');
+	if (idex != '') {
+		// $(`#con_${idex}`).hide();
+		// $(`#adminModal_${idex}`).show();
+		$.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: `${apiPaths}admin/view/${idex}`,
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: token2,
+			},
+			success: function(res) {
+				if (res.status == 200 || res.status == 201) {
+					$('#viewLoader').hide();
+					$('#viewBody').show();
+				} else {
+					$('#viewBody').html(`<h5 style="color:red">${res.msg}</h5>`);
+					$('#viewLoader').hide();
+					$('#viewBody').show();
+				}
+			},
+			error: function(res) {
+				$('#viewBody').html(`<h5 style="color:red">${res.msg}</h5>`);
+				$('#viewLoader').hide();
+				$('#viewBody').show();
+			},
+		});
+	} else {
+		$('#viewBody').html(`<h5 style="color:red">ID field empty</h5>`);
+		$('#viewLoader').hide();
+		$('#viewBody').show();
+	}
+}
+
 function createAdmin() {
 	$('#createBtn').hide();
 	$('#createLoader').show();
@@ -216,6 +253,55 @@ function createAdmin() {
 			alert(res.responseText);
 			$('#createLoader').hide();
 			$('#createBtn').show();
+		},
+	});
+}
+
+function editAdmin() {
+	$('#editBtn').hide();
+	$('#editLoader').show();
+
+	let editName = $('#eName').val();
+	let editEmail = $('#eEmail').val();
+	let editPhone = $('#ePhone').val();
+
+	let data = {
+		name: editName,
+		email: editEmail,
+		phone_number: editPhone,
+	};
+
+	var token1 = localStorage.getItem('token');
+
+	//using AJAX to make the submit call
+	$.ajax({
+		type: 'POST',
+		dataType: 'json',
+		cache: false,
+		url: `${apiPaths}admin/signup`,
+		headers: {
+			// 'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token1,
+		},
+		data: JSON.stringify(data),
+		success: (res) => {
+			if (res.status == 201 || res.status == 200) {
+				alert('Succesful');
+				$('#editLoader').hide();
+				$('#editBtn').show();
+				$('#exampleModal').modal('hide');
+				listAdmins(1);
+			} else {
+				alert('Error!!');
+				$('#editLoader').hide();
+				$('#editBtn').show();
+			}
+		},
+		error: (res) => {
+			alert(res.responseText);
+			$('#editLoader').hide();
+			$('#editBtn').show();
 		},
 	});
 }

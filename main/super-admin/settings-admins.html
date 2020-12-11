@@ -265,8 +265,9 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <i id="viewLoader" class="fa fa-3x fa-spin fa-spinner"></i>
 
-                                <div>
+                                <div style="display: none;" id="viewBody">
                                     <div class="form-group floating-addon">
                                         <label>Name</label>
                                         <div class="input-group">
@@ -275,8 +276,8 @@
                                                     <i class="far fa-user"></i>
                                                 </div>
                                             </div>
-                                            <input id="name" type="text" class="form-control" name="name" autofocus
-                                                placeholder="Name" value="Chuks David">
+                                            <input id="eName" type="text" class="form-control required_e" name="name"
+                                                autofocus placeholder="Name">
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
@@ -287,8 +288,8 @@
                                                     <i class="fas fa-envelope"></i>
                                                 </div>
                                             </div>
-                                            <input id="email" type="email" class="form-control" name="email"
-                                                placeholder="Email" value="chukkydave@gmail.com">
+                                            <input id="eEmail" type="email" class="form-control required_e" name="email"
+                                                placeholder="Email">
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
@@ -299,16 +300,18 @@
                                                     <i class="fas fa-phone"></i>
                                                 </div>
                                             </div>
-                                            <input id="phone" type="number" class="form-control" name="phone"
-                                                placeholder="Phone" value="08134037457">
+                                            <input id="ePhone" type="number" class="form-control required_e"
+                                                name="phone" placeholder="Phone">
                                         </div>
                                     </div>
 
 
                                     <div class="form-group text-left">
-                                        <button type="submit" class="btn btn-lg btn-primary">
+                                        <button id="editBtn" class="btn btn-lg btn-primary">
                                             Save
                                         </button>
+                                        <i style="display: none;" id="editLoader"
+                                            class="fa fa-3x fa-spin fa-spinner"></i>
                                     </div>
                                 </div>
                             </div>
