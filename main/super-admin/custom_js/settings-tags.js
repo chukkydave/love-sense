@@ -5,9 +5,21 @@ $(document).ready(function() {
 		if (confirm('Click OK to Delete Tag')) deleteMe(particularId);
 		return false;
 	});
+
+	$(document).on('click', '.deleteMe .editUs', function() {
+		let thisId = $(this).attr('id');
+		$('#editTagBtn').attr('dir', thisId);
+		$('#exampleModaledit').modal('show');
+	});
 	$('#createTagBtn').on('click', function() {
 		if (isEmptyInput('.required_t')) {
 			createTag();
+		}
+	});
+
+	$('#editTagBtn').on('click', function() {
+		if (isEmptyInput('.required_te')) {
+			editTag();
 		}
 	});
 });
@@ -70,8 +82,8 @@ function listTags(page) {
                                 <div class="dropdown-menu deleteMe"
                                 style="will-change: transform;">
                                 
-                                <a class="dropdown-item" data-toggle="modal" data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
+                                <a class="dropdown-item editUs" id="${value._id}" data-toggle="modal" data-target="#exampleModaledit"
+                                                                        >Edit</a>
                                 <a style="cursor:pointer;" class="dropdown-item deleteUs" id="${value._id}" 
                                 >Delete</a>
 
@@ -118,7 +130,7 @@ function listTags(page) {
 }
 
 function deleteMe(idex) {
-	var token2 = localStorage.getItem('token');
+	let token2 = localStorage.getItem('token');
 	if (idex != '') {
 		$(`#tag_${idex}`).hide();
 		$(`#tagLoader_${idex}`).show();
@@ -199,6 +211,56 @@ function createTag() {
 			$('#createTagBtn').show();
 		},
 	});
+}
+
+function editTag() {
+	let token2 = localStorage.getItem('token');
+	// if (id != '') {
+	let id = $('#editTagBtn').attr('dir');
+	$('#editTagBtn').hide();
+	$('#editTagLoader').show();
+
+	let editTagName = $('#tagName').val();
+	let editTagColor = $('#tagColor').val();
+
+	let data = {
+		tag_name: editTagName,
+		tag_color: editTagColor,
+	};
+	$.ajax({
+		type: 'PATCH',
+		dataType: 'json',
+		url: `${apiPaths}admin/update_tags/${id}`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token2,
+		},
+		data: JSON.stringify(data),
+		success: function(res) {
+			if (res.status == 200 || res.status == 201) {
+				alert('Successful');
+				$('#tagName').val('');
+				$('#tagColor').val('');
+				$('#exampleModaledit').modal('hide');
+				$('#editTagLoader').hide();
+				$('#editTagBtn').show();
+				listTags(1);
+			} else {
+				alert('Error!!');
+				$('#editTagLoader').hide();
+				$('#editTagBtn').show();
+			}
+		},
+		error: function(res) {
+			alert('Error!!');
+			$('#editTagLoader').hide();
+			$('#editTagBtn').show();
+		},
+	});
+	// } else {
+	// 	alert('Cannot Delete on an Empty Value');
+	// }
 }
 
 $('#filterNamey').on('keyup', function() {
