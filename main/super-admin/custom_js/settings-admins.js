@@ -121,11 +121,11 @@ function deleteMe(idex) {
 	var token2 = localStorage.getItem('token');
 	if (idex != '') {
 		$(`#con_${idex}`).hide();
-		$(`#conModal_${idex}`).show();
+		$(`#adminModal_${idex}`).show();
 		$.ajax({
 			type: 'DELETE',
 			dataType: 'json',
-			url: `${apiPaths}del/contact/${idex}`,
+			url: `${apiPaths}admin/delete/${idex}`,
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
@@ -133,17 +133,17 @@ function deleteMe(idex) {
 			},
 			success: function(res) {
 				if (res.status == 200) {
-					alert('Contact delete successful');
+					alert('Admin delete successful');
 					listAdmins(1);
 				} else {
 					alert('Error!!');
-					$(`#conModal_${idex}`).hide();
+					$(`#adminModal_${idex}`).hide();
 					$(`#con_${idex}`).show();
 				}
 			},
 			error: function(res) {
 				alert('Error!!');
-				$(`#conModal_${idex}`).hide();
+				$(`#adminModal_${idex}`).hide();
 				$(`#con_${idex}`).show();
 			},
 		});
