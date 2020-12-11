@@ -215,7 +215,6 @@ function createTag() {
 
 function editTag() {
 	let token2 = localStorage.getItem('token');
-	// if (id != '') {
 	let id = $('#editTagBtn').attr('dir');
 	$('#editTagBtn').hide();
 	$('#editTagLoader').show();
@@ -258,9 +257,6 @@ function editTag() {
 			$('#editTagBtn').show();
 		},
 	});
-	// } else {
-	// 	alert('Cannot Delete on an Empty Value');
-	// }
 }
 
 $('#filterNamey').on('keyup', function() {
