@@ -42,7 +42,7 @@
               <img alt="image" src="assets/img/user.png" class="user-img-radious-style"> <span
                 class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
+              <div class="dropdown-title" id="namey1"></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
       										fa-user"></i> Profile
               </a>
@@ -57,7 +57,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+            <a href="dashboard.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
                 class="logo-name">KD</span>
             </a>
           </div>
@@ -66,8 +66,8 @@
               <img alt="image" src="assets/img/user.png">
             </div>
             <div class="sidebar-user-details">
-              <div class="user-name">Olivia Thomas</div>
-              <div class="user-role">Administrator</div>
+              <div class="user-name" id="user-name1"></div>
+              <div class="user-role">Super-Administrator</div>
               <div class="sidebar-userpic-btn">
 
               </div>
@@ -76,7 +76,7 @@
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Main</li> -->
             <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+              <a href="dashboard.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
               <a class="nav-link" href="create-post.html"><i data-feather="briefcase"></i><span>Create Post</span></a>
@@ -108,7 +108,7 @@
               <h4 class="page-title m-b-0">Profile</h4>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">
+              <a href="dashboard.html">
                 <i data-feather="home"></i></a>
             </li>
             <li class="breadcrumb-item">Profile</li>
@@ -260,17 +260,17 @@
                           <div class="col-md-3 col-6 b-r">
                             <strong>Full Name</strong>
                             <br>
-                            <p class="text-muted">Emily Smith</p>
+                            <p class="text-muted" id="myName"></p>
                           </div>
                           <div class="col-md-3 col-6 b-r">
                             <strong>Mobile</strong>
                             <br>
-                            <p class="text-muted">(123) 456 7890</p>
+                            <p class="text-muted" id="myPhone"></p>
                           </div>
                           <div class="col-md-3 col-6 b-r">
                             <strong>Email</strong>
                             <br>
-                            <p class="text-muted">johndeo@example.com</p>
+                            <p class="text-muted" id="myEmail"></p>
                           </div>
 
                         </div>
@@ -279,7 +279,7 @@
 
                       </div>
                       <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
-                        <form method="post" class="needs-validation">
+                        <div class="needs-validation">
                           <div class="card-header">
                             <h4>Edit Profile</h4>
                           </div>
@@ -287,21 +287,21 @@
                             <div class="row">
                               <div class="form-group col-md-4 col-12">
                                 <label>Name</label>
-                                <input type="text" class="form-control" value="">
+                                <input type="text" id="cName" class="form-control required_f" value="">
                                 <div class="invalid-feedback">
                                   Please fill in the first name
                                 </div>
                               </div>
                               <div class="form-group col-md-4 col-12">
                                 <label>Email</label>
-                                <input type="email" class="form-control" value="">
+                                <input type="email" id="cEmail" class="form-control required_f" value="">
                                 <div class="invalid-feedback">
                                   Please fill in the email
                                 </div>
                               </div>
                               <div class="form-group col-md-4 col-12">
                                 <label>Phone</label>
-                                <input type="tel" class="form-control" value="">
+                                <input type="tel" id="cPhone" class="form-control required_f" value="">
                               </div>
 
                             </div>
@@ -309,9 +309,10 @@
 
                           </div>
                           <div class="card-footer text-right">
-                            <button class="btn btn-primary">Save Changes</button>
+                            <button id="changeBtn" class="btn btn-primary">Save Changes</button>
+                            <i style="display: none;" id="changeLoader" class="fa fa-3x fa-spin fa-spinner"></i>
                           </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -340,6 +341,7 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
+  <script src="custom_js/profile.js"></script>
 </body>
 
 
