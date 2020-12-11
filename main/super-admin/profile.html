@@ -47,7 +47,7 @@
       										fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -251,7 +251,11 @@
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
-                          aria-selected="false">Setting</a>
+                          aria-selected="false">Update Profile</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#changePassword" role="tab"
+                          aria-selected="false">Change Password</a>
                       </li>
                     </ul>
                     <div class="tab-content tab-bordered" id="myTab3Content">
@@ -311,6 +315,39 @@
                           <div class="card-footer text-right">
                             <button id="changeBtn" class="btn btn-primary">Save Changes</button>
                             <i style="display: none;" id="changeLoader" class="fa fa-3x fa-spin fa-spinner"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="changePassword" role="tabpanel" aria-labelledby="profile-tab2">
+                        <div class="needs-validation">
+                          <div class="card-header">
+                            <h4>Change Password</h4>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="form-group col-md-4 col-12">
+                                <label>Old Password</label>
+                                <input type="password" id="cOldPassword" class="form-control required_cp" value="">
+                                <div class="invalid-feedback">
+                                  Please fill in the old password
+                                </div>
+                              </div>
+                              <div class="form-group col-md-4 col-12">
+                                <label>New Password</label>
+                                <input type="password" id="cNewPassword" class="form-control required_cp" value="">
+                                <div class="invalid-feedback">
+                                  Please fill in the new password
+                                </div>
+                              </div>
+
+
+                            </div>
+
+
+                          </div>
+                          <div class="card-footer text-right">
+                            <button id="changeBtn2" class="btn btn-primary">Save Changes</button>
+                            <i style="display: none;" id="changeLoader2" class="fa fa-3x fa-spin fa-spinner"></i>
                           </div>
                         </div>
                       </div>
