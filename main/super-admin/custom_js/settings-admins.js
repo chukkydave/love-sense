@@ -241,6 +241,10 @@ function createAdmin() {
 				alert('Succesful');
 				$('#createLoader').hide();
 				$('#createBtn').show();
+				$('#cName').val('');
+				$('#cEmail').val('');
+				$('#password').val('');
+				$('#cPhone').val('');
 				$('#exampleModal').modal('hide');
 				listAdmins(1);
 			} else {
