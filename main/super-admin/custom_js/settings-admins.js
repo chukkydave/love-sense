@@ -5,7 +5,30 @@ $(document).ready(function() {
 		if (confirm('Click OK to Delete Admin')) deleteMe(particularId);
 		return false;
 	});
+	$('#createBtn').on('click', function() {
+		if (isEmptyInput('.required_cr')) {
+			createAdmin();
+		}
+	});
 });
+
+function isEmptyInput(first) {
+	let isEmpty = false;
+	$(first).each(function() {
+		var input = $.trim($(this).val());
+		if (input.length === 0 || input === '0') {
+			$(this).addClass('has-error');
+			isEmpty = true;
+		} else {
+			$(this).removeClass('has-error');
+		}
+	});
+	if (isEmpty === true) {
+		return false;
+	} else {
+		return true;
+	}
+}
 
 function listAdmins(page) {
 	var token1 = localStorage.getItem('token');
@@ -145,6 +168,57 @@ $('.toggle-password').click(function() {
 		input.attr('type', 'password');
 	}
 });
+
+function createAdmin() {
+	$('#createBtn').hide();
+	$('#createLoader').show();
+
+	let createName = $('#cName').val();
+	let createEmail = $('#cEmail').val();
+	let createPassword = $('#password').val();
+	let createPhone = $('#cPhone').val();
+
+	let data = {
+		name: createName,
+		email: createEmail,
+		password: createPassword,
+		phone_number: createPhone,
+	};
+
+	var token1 = localStorage.getItem('token');
+
+	//using AJAX to make the submit call
+	$.ajax({
+		type: 'POST',
+		dataType: 'json',
+		cache: false,
+		url: `${apiPaths}admin/signup`,
+		headers: {
+			// 'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token1,
+		},
+		data: JSON.stringify(data),
+		success: (res) => {
+			if (res.status == 201 || res.status == 200) {
+				alert('Succesful');
+				$('#createLoader').hide();
+				$('#createBtn').show();
+				$('#exampleModal').modal('hide');
+				listAdmins(1);
+			} else {
+				alert('Error!!');
+				$('#createLoader').hide();
+				$('#createBtn').show();
+			}
+		},
+		error: (res) => {
+			alert(res.responseText);
+			$('#createLoader').hide();
+			$('#createBtn').show();
+		},
+	});
+}
 
 // deleteMe = () => {
 // 	if (confirm('Click OK to Delete Admin')) alert('Just a test To delete');

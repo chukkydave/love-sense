@@ -38,21 +38,16 @@ function isEmptyInput(first) {
 function updateInfo() {
 	$('#changeBtn').hide();
 	$('#changeLoader').show();
-	//declaring variable using the ES6 let
+
 	let changeName = $('#cName').val();
 	let changeEmail = $('#cEmail').val();
 	let changePhone = $('#cPhone').val();
-
-	// using the ES6 const variable to hold the url to the api path
-	const URL = `${apiPaths}admin/update_admin`;
-	//storing the variable in a data variable to be an object as Displayed in the PAYLOAD
 
 	let data = {
 		name: changeName,
 		email: changeEmail,
 		phone_number: changePhone,
 	};
-	console.log(data);
 
 	var token1 = localStorage.getItem('token');
 
@@ -61,7 +56,7 @@ function updateInfo() {
 		type: 'PATCH',
 		dataType: 'json',
 		cache: false,
-		url: URL,
+		url: `${apiPaths}admin/update_admin`,
 		headers: {
 			// 'Accept': 'application/json',
 			'Content-Type': 'application/json',
@@ -69,7 +64,6 @@ function updateInfo() {
 		},
 		data: JSON.stringify(data),
 		success: (res) => {
-			// alert(res.status)
 			if (res.status == 201 || res.status == 200) {
 				alert('Succesful');
 				$('#changeLoader').hide();
@@ -92,19 +86,14 @@ function updateInfo() {
 function changePassword() {
 	$('#changeBtn2').hide();
 	$('#changeLoader2').show();
-	//declaring variable using the ES6 let
+
 	let oldPassword = $('#cOldPassword').val();
 	let newPassword = $('#cNewPassword').val();
-
-	// using the ES6 const variable to hold the url to the api path
-	const URL = `${apiPaths}super_admin/change_password`;
-	//storing the variable in a data variable to be an object as Displayed in the PAYLOAD
 
 	let data = {
 		new_password: newPassword,
 		password: oldPassword,
 	};
-	console.log(data);
 
 	var token1 = localStorage.getItem('token');
 
@@ -113,7 +102,7 @@ function changePassword() {
 		type: 'PATCH',
 		dataType: 'json',
 		cache: false,
-		url: URL,
+		url: `${apiPaths}super_admin/change_password`,
 		headers: {
 			// 'Accept': 'application/json',
 			'Content-Type': 'application/json',
@@ -121,7 +110,6 @@ function changePassword() {
 		},
 		data: JSON.stringify(data),
 		success: (res) => {
-			// alert(res.status)
 			if (res.status == 201 || res.status == 200) {
 				alert('Succesful');
 				$('#changeLoader2').hide();
