@@ -266,3 +266,8 @@ $('#filterNamey').on('keyup', function() {
 	});
 	$('.loadySef').hide();
 });
+
+$('#exampleModaledit').on('hide.bs.modal', function() {
+	$('#tagName').val('');
+	$('#tagColor').val('');
+});
