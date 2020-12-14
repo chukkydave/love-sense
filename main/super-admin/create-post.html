@@ -45,12 +45,12 @@
               <img alt="image" src="assets/img/user.png" class="user-img-radious-style"> <span
                 class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
+              <div class="dropdown-title" id="namey1"></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
       										fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -69,8 +69,8 @@
               <img alt="image" src="assets/img/user.png">
             </div>
             <div class="sidebar-user-details">
-              <div class="user-name">Olivia Thomas</div>
-              <div class="user-role">Administrator</div>
+              <div class="user-name" id="user-name1"></div>
+              <div class="user-role">Super-Administrator</div>
               <div class="sidebar-userpic-btn">
 
               </div>
@@ -127,32 +127,32 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control">
+                        <input type="text" id="postTitle" class="form-control required_po">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Author</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control">
+                        <input type="text" id="postAuthor" class="form-control required_po">
                       </div>
                     </div>
 
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                       <div class="col-sm-12 col-md-7">
-                        <textarea type="text" rows="4" class="form-control"></textarea>
+                        <textarea type="text" id="postDesc" rows="4" class="form-control required_po"></textarea>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="date" class="form-control">
+                        <input type="date" id="postDate" class="form-control required_po">
                       </div>
                     </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric" multiple="">
+                        <select id="postTag" class="form-control selectric required_po" multiple="">
                           <option value="">--Select--</option>
                           <option>Faith</option>
                           <option>Hope</option>
@@ -174,14 +174,15 @@
                     <div class="col-sm-12 col-md-7">
                       <div id="image-preview" class="image-preview">
                         <label for="image-upload" id="image-label">Choose File</label>
-                        <input type="file" name="image" id="image-upload" />
+                        <input class="required_po" type="file" name="image" id="image-upload"
+                          accept="image/jpg,image/png,image/jpeg,image/gif" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">File</label>
                     <div class="col-sm-12 col-md-7">
-                      <input type="file" class="form-control">
+                      <input id="postFile" type="file" class="form-control required_po">
                     </div>
                   </div>
                   <!--<div class="form-group row mb-4">
@@ -197,7 +198,8 @@
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                     <div class="col-sm-12 col-md-7">
-                      <button class="btn btn-primary">Create Post</button>
+                      <button id="postBtn" class="btn btn-primary">Create Post</button>
+                      <i id="postLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
                     </div>
                   </div>
                 </div>
@@ -231,6 +233,7 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
+  <script src="custom_js/create-post.js"></script>
 </body>
 
 
