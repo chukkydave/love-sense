@@ -73,8 +73,8 @@ function listAudios(page) {
 						var k = page * page_limit - page_limit + 1;
 					}
 					$(res.records).each((index, value) => {
-						let thisId = value._id;
-						audio_table += `<tr id="aud_${value._id}">`;
+						let thisId = value.file_id;
+						audio_table += `<tr id="aud_${value.file_id}">`;
 						audio_table += `<td><div class="custom-checkbox custom-control">
                                 <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
                                   id="checkbox-2">
@@ -97,16 +97,16 @@ function listAudios(page) {
                                 <div class="dropdown-menu deleteMe"
                                 style="will-change: transform;">
                                 
-                                <a class="dropdown-item editUs" id="${value._id}" data-toggle="modal" data-target="#exampleModal"
+                                <a class="dropdown-item editUs" id="${value.file_id}" data-toggle="modal" data-target="#exampleModal"
                                                                         >Edit</a>
-                                <a style="cursor:pointer;" class="dropdown-item deleteUs" id="${value._id}" 
+                                <a style="cursor:pointer;" class="dropdown-item deleteUs" id="${value.file_id}" 
                                 >Delete</a>
 
                                 </div>
                                 </div> </td>`;
 
 						audio_table += '</tr>';
-						audio_table += `<tr style="display:none" id="audLoader_${value._id}" class="loadySef"><td colspan="4"><i class="fa fa-3x fa-spin fa-spinner"></i></td></tr>`;
+						audio_table += `<tr style="display:none" id="audLoader_${value.file_id}" class="loadySef"><td colspan="4"><i class="fa fa-3x fa-spin fa-spinner"></i></td></tr>`;
 					});
 					// <a class="dropdown-item" data-toggle="modal" data-target="#exampleModaledit"
 					//         href="#">Edit</a>
@@ -152,7 +152,7 @@ function deleteMe(idex) {
 		$.ajax({
 			type: 'DELETE',
 			dataType: 'json',
-			url: `${apiPaths}del_file/${idex}`,
+			url: `${apiPaths}admin/delete_file/${idex}`,
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
