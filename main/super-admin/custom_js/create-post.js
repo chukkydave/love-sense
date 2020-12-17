@@ -5,6 +5,7 @@ var postImgy;
 var postFiley;
 
 $(document).ready(function() {
+	listTags();
 	$('input#image-upload').on('change', function() {
 		let file = this.files[0];
 		postImgy = file;
@@ -114,6 +115,50 @@ function createPost() {
 			$('#postBtn').show();
 			// $('#createTagLoader').hide();
 			// $('#createTagBtn').show();
+		},
+	});
+}
+
+function listTags() {
+	var token1 = localStorage.getItem('token');
+	var page_limit = 500;
+	$('#postTag').hide();
+	$('#tagOptLoader').show();
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `${apiPaths}admin/view_tags/1/${page_limit}`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token1,
+		},
+
+		success: function(res) {
+			function toTitleCase(str) {
+				return str.replace(/\w\S*/g, function(txt) {
+					return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+				});
+			}
+
+			var options = '';
+
+			$(res.tagsrecords).each(function(i, v) {
+				options += `<option value="${v._id}">${toTitleCase(v.tag_name)}</option>`;
+			});
+
+			$('#postTag').append(options);
+			$('#tagOptLoader').hide();
+			$('#postTag').show();
+		},
+		// jqXHR, textStatus, errorThrown
+		error(response) {
+			console.log(response);
+			$('#postTag').append(`<option value="">Error Loading result!!</option>`);
+			$('#tagOptLoader').hide();
+			$('#postTag').show();
 		},
 	});
 }

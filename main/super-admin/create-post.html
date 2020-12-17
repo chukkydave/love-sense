@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/css/app.min.css">
   <link rel="stylesheet" href="assets/bundles/summernote/summernote-bs4.css">
   <link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css">
-  <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
+  <!-- <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css"> -->
   <link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
@@ -152,12 +152,17 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                       <div class="col-sm-12 col-md-7">
-                        <select id="postTag" class="form-control selectric required_po" multiple="">
+                        <!-- <select id="postTag" class="form-control selectric required_po" multiple="">
                           <option value="">--Select--</option>
                           <option>Faith</option>
                           <option>Hope</option>
                           <option>Love</option>
+                        </select> -->
+                        <select class="form-control select2 required_po" multiple="multiple" id="postTag"
+                          style="width:100% !important;max-width:800px !important; border-radius:30px !important; ">
+
                         </select>
+                        <i id="tagOptLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
                       </div>
                     </div>
 
@@ -224,7 +229,7 @@
   <!-- JS Libraies -->
   <script src="assets/bundles/summernote/summernote-bs4.js"></script>
   <script src="assets/bundles/select2/dist/js/select2.full.min.js"></script>
-  <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
+  <!-- <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script> -->
   <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
   <script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
   <!-- Page Specific JS File -->
