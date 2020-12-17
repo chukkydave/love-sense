@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 ('use strict');
 var apiPaths = 'https://streaming-audio-library.herokuapp.com/api/v1/';
-var myHome = 'https://www.lovesense.online/main/admin/index.html';
+var myHome = 'https://www.lovesense.online/main/super-admin/index.html';
 
 // love-sense
 

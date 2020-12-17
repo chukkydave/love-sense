@@ -147,14 +147,14 @@
                     <h4>All Audios</h4>
                   </div>
                   <div class="card-body">
-                    <div class="float-left">
+                    <!-- <div class="float-left">
                       <select class="form-control selectric">
                         <option>--Action For Selected--</option>
                         <!-- <option>Export As Excel</option>
-                        <option>Export as PDF</option> -->
+                        <option>Export as PDF</option> --
                         <option>Delete Permanently</option>
                       </select>
-                    </div>
+                    </div> -->
                     <div class="float-right">
                       <form>
                         <div class="input-group">
@@ -168,16 +168,16 @@
                       <i id="audioLoader" class="fa fa-3x fa-spin fa-spinner"></i>
                       <table class="table table-striped" id="audioTable" style="display: none;">
                         <thead>
-                          <th class="pt-2">
+                          <!-- <th class="pt-2">
                             <div class="custom-checkbox custom-checkbox-table custom-control">
                               <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
                                 class="custom-control-input" id="checkbox-all">
                               <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                             </div>
-                          </th>
+                          </th> -->
                           <th>#</th>
-                          <th>Author</th>
                           <th>Title</th>
+                          <th>Author</th>
                           <!-- <th>Tags</th> -->
                           <!-- <th>Description</th> -->
                           <th>Created At</th>
@@ -216,7 +216,7 @@
               <div class="modal-body">
                 <i id="auLoader" class="fa fa-3x fa-spin fa-spinner"></i>
 
-                <div id="auBody">
+                <div id="auBody" style="display:none">
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                     <div class="col-sm-12 col-md-7">
@@ -246,7 +246,7 @@
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                     <div class="col-sm-12 col-md-7">
 
-                      <select class="form-control select2" multiple="multiple" id="audioTag"
+                      <select class="form-control" multiple="multiple" id="audioTag"
                         style="width:100% !important;max-width:800px !important; border-radius:30px !important; ">
 
                       </select>
@@ -260,10 +260,12 @@
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
                     <div class="col-sm-12 col-md-7">
-                      <div id="image-preview" class="image-preview" style="background-image: url(assets/img/user.png);">
-                        <label for="image-upload" id="image-label">Choose File</label>
-                        <input type="file" name="image" id="image-upload" />
-                      </div>
+                      <!-- <div id="image-preview" class="image-preview">
+                        <label for="image-upload" id="image-label">Choose File</label> -->
+                      <input type="file" name="image" id="image-upload" />
+                      <!-- </div> -->
+                      <img src="" height="200" width="200" style="margin-top: 15px" alt="Image preview..."
+                        id="audioImg">
                     </div>
                   </div>
 

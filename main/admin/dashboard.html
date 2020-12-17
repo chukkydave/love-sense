@@ -42,12 +42,12 @@
               <img alt="image" src="assets/img/user.png" class="user-img-radious-style"> <span
                 class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
+              <div class="dropdown-title" id="namey1"></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
       										fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -66,8 +66,8 @@
               <img alt="image" src="assets/img/user.png">
             </div>
             <div class="sidebar-user-details">
-              <div class="user-name">Olivia Thomas</div>
-              <div class="user-role">Administrator</div>
+              <div class="user-name" id="user-name1"></div>
+              <div class="user-role">Super-Administrator</div>
               <div class="sidebar-userpic-btn">
 
               </div>
@@ -146,8 +146,8 @@
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                         <h6 class="m-b-20 text-right">No. Of Streams</h6>
-                        <h4 class="text-right"><span>10.3K</span>
-                        </h4>
+                        <h4 class="text-right" id="noOfStream" style="display: none;"></h4>
+                        <i id="noOfStreamLoader" class="fa fa-3x fa-spin fa-spinner"></i>
                       </div>
                     </div>
                     <div id="cardChart2"></div>
@@ -167,8 +167,9 @@
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
                         <h6 class="m-b-20 text-right">No. Of Downloads</h6>
-                        <h4 class="text-right"><span>754</span>
-                        </h4>
+                        <h4 class="text-right" id="noOfDown" style="display: none;"></h4>
+                        <i id="noOfDownLoader" class="fa fa-3x fa-spin fa-spinner"></i>
+
                       </div>
                     </div>
                     <div id="cardChart3"></div>
@@ -512,6 +513,7 @@
   <script src="assets/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
+  <script src="custom_js/dashboard.js"></script>
 </body>
 
 

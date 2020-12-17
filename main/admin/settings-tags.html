@@ -42,12 +42,12 @@
                                 src="assets/img/user.png" class="user-img-radious-style"> <span
                                 class="d-sm-none d-lg-inline-block"></span></a>
                         <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">Hello Sarah Smith</div>
+                            <div class="dropdown-title" id="namey1"></div>
                             <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i
+                            <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i
                                     class="fas fa-sign-out-alt"></i>
                                 Logout
                             </a>
@@ -58,8 +58,8 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
-                                class="logo-name">KD</span>
+                        <a href="dashboard.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" />
+                            <span class="logo-name">KD</span>
                         </a>
                     </div>
                     <div class="sidebar-user">
@@ -67,8 +67,8 @@
                             <img alt="image" src="assets/img/user.png">
                         </div>
                         <div class="sidebar-user-details">
-                            <div class="user-name">Olivia Thomas</div>
-                            <div class="user-role">Administrator</div>
+                            <div class="user-name" id="user-name1"></div>
+                            <div class="user-role">Super-Administrator</div>
                             <div class="sidebar-userpic-btn">
 
                             </div>
@@ -77,7 +77,7 @@
                     <ul class="sidebar-menu">
                         <!-- <li class="menu-header">Main</li> -->
                         <li class="dropdown">
-                            <a href="index.html" class="nav-link"><i
+                            <a href="dashboard.html" class="nav-link"><i
                                     data-feather="monitor"></i><span>Dashboard</span></a>
                         </li>
                         <li class="dropdown">
@@ -113,7 +113,7 @@
                             <h4 class="page-title m-b-0">Tags</h4>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="index.html">
+                            <a href="dashboard.html">
                                 <i data-feather="home"></i></a>
                         </li>
                         <li class="breadcrumb-item">Tags</li>
@@ -148,172 +148,26 @@
                                         </div>
                                         <div class="clearfix mb-3"></div>
                                         <div class="table-responsive">
-                                            <table class="table table-striped">
+                                            <i id="tagLoader" class="fa fa-3x fa-spin fa-spinner"></i>
+                                            <table id="tagTable" style="display: none;" class="table table-striped">
                                                 <thead>
+                                                    <th width="10%">#</th>
                                                     <th width="40%">Tag</th>
                                                     <th width="40%">Color</th>
-                                                    <th width="20%">Action</th>
+                                                    <th width="10%">Action</th>
                                                 </thead>
-                                                <tbody id='tbodyy'>
-                                                    <tr>
-                                                        <td>Faith</td>
-                                                        <td class="align-middle">
-                                                            <i class="material-icons col-blue">local_offer</i>Blue
-                                                        </td>
+                                                <tbody id='tag_body'>
 
-                                                        <td>
-                                                            <div class="dropdown d-inline mr-2">
-                                                                <button class="btn btn-primary dropdown-toggle"
-                                                                    type="button" id="dropdownMenuButton3"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Actions
-                                                                </button>
-                                                                <div class="dropdown-menu"
-                                                                    style="will-change: transform;">
-                                                                    <a class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
-                                                                    <a class="dropdown-item" onclick="deleteMe()"
-                                                                        href="#">Delete</a>
-                                                                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Love</td>
-                                                        <td class="align-middle">
-                                                            <i class="material-icons col-red">local_offer</i>Red
-                                                        </td>
 
-                                                        <td>
-                                                            <div class="dropdown d-inline mr-2">
-                                                                <button class="btn btn-primary dropdown-toggle"
-                                                                    type="button" id="dropdownMenuButton3"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Actions
-                                                                </button>
-                                                                <div class="dropdown-menu"
-                                                                    style="will-change: transform;">
-                                                                    <a class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
-                                                                    <a class="dropdown-item" onclick="deleteMe()"
-                                                                        href="#">Delete</a>
-                                                                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Convenant</td>
-                                                        <td class="align-middle">
-                                                            <i class="material-icons col-gray">local_offer</i>Gray
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="dropdown d-inline mr-2">
-                                                                <button class="btn btn-primary dropdown-toggle"
-                                                                    type="button" id="dropdownMenuButton3"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Actions
-                                                                </button>
-                                                                <div class="dropdown-menu"
-                                                                    style="will-change: transform;">
-                                                                    <a class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
-                                                                    <a class="dropdown-item" onclick="deleteMe()"
-                                                                        href="#">Delete</a>
-                                                                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Grace</td>
-                                                        <td class="align-middle">
-                                                            <i class="material-icons col-yellow">local_offer</i>Yellow
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="dropdown d-inline mr-2">
-                                                                <button class="btn btn-primary dropdown-toggle"
-                                                                    type="button" id="dropdownMenuButton3"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Actions
-                                                                </button>
-                                                                <div class="dropdown-menu"
-                                                                    style="will-change: transform;">
-                                                                    <a class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
-                                                                    <a class="dropdown-item" onclick="deleteMe()"
-                                                                        href="#">Delete</a>
-                                                                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Peace</td>
-                                                        <td class="align-middle">
-                                                            <i class="material-icons col-green">local_offer</i>Green
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="dropdown d-inline mr-2">
-                                                                <button class="btn btn-primary dropdown-toggle"
-                                                                    type="button" id="dropdownMenuButton3"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    Actions
-                                                                </button>
-                                                                <div class="dropdown-menu"
-                                                                    style="will-change: transform;">
-                                                                    <a class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModaledit"
-                                                                        href="#">Edit</a>
-                                                                    <a class="dropdown-item" onclick="deleteMe()"
-                                                                        href="#">Delete</a>
-                                                                    <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="float-right">
-                                            <nav>
-                                                <ul class="pagination">
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
-                                                            <span class="sr-only">Previous</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="page-item active">
-                                                        <a class="page-link" href="#">1</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">2</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#">3</a>
-                                                    </li>
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="#" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                            <span class="sr-only">Next</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
+                                            <div class="container">
+                                                <nav aria-label="Page navigation">
+                                                    <ul class="pagination" id="pagination"></ul>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -342,20 +196,21 @@
                                                     <i class="fas fa-bookmark"></i>
                                                 </div>
                                             </div>
-                                            <input id="tag_name" type="text" class="form-control" name="tag_name"
-                                                autofocus placeholder="Tag Name">
+                                            <input id="tag_name" type="text" class="form-control required_t"
+                                                name="tag_name" autofocus placeholder="Tag Name">
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
                                         <label>Tag Color</label>
                                         <div class="input-group">
 
-                                            <select id="tag_color" class="form-control" name="tag_color" autofocus>
+                                            <select id="tag_color" class="form-control required_t" name="tag_color"
+                                                autofocus>
                                                 <option value="">--Select--</option>
-                                                <option value="">Red</option>
-                                                <option value="">Yellow</option>
-                                                <option value="">Blue</option>
-                                                <option value="">Green</option>
+                                                <option value="red">Red</option>
+                                                <option value="yellow">Yellow</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="green">Green</option>
                                             </select>
                                         </div>
                                     </div>
@@ -363,9 +218,11 @@
 
 
                                     <div class="form-group text-left">
-                                        <button type="submit" class="btn btn-lg btn-primary">
-                                            Add
+                                        <button id="createTagBtn" class="btn btn-lg btn-primary">
+                                            Create
                                         </button>
+                                        <i id="createTagLoader" style="display: none;"
+                                            class="fa fa-3x fa-spin fa-spinner"></i>
                                     </div>
                                 </div>
                             </div>
@@ -394,30 +251,38 @@
                                                     <i class="fas fa-bookmark"></i>
                                                 </div>
                                             </div>
-                                            <input id="tag_name" type="text" class="form-control" name="tag_name"
-                                                autofocus placeholder="Tag Name" value="Faith">
+                                            <input id="tagName" type="text" class="form-control required_te"
+                                                name="tagName" autofocus placeholder="Tag Name">
+                                            <i id="editTagNameLoader" style="display: none;"
+                                                class="fa fa-3x fa-spin fa-spinner"></i>
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
                                         <label>Tag Color</label>
                                         <div class="input-group">
 
-                                            <select id="tag_color" class="form-control" name="tag_color" autofocus>
+                                            <select id="tagColor" class="form-control required_te" name="tagColor"
+                                                autofocus>
                                                 <option value="">--Select--</option>
-                                                <option value="">Red</option>
-                                                <option value="">Yellow</option>
-                                                <option selected value="">Blue</option>
-                                                <option value="">Green</option>
+                                                <option value="red">Red</option>
+                                                <option value="yellow">Yellow</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="green">Green</option>
+                                                <option value="purple">Purple</option>
                                             </select>
+                                            <i id="editTagColorLoader" style="display: none;"
+                                                class="fa fa-3x fa-spin fa-spinner"></i>
                                         </div>
                                     </div>
 
 
 
                                     <div class="form-group text-left">
-                                        <button type="submit" class="btn btn-lg btn-primary">
+                                        <button id="editTagBtn" class="btn btn-lg btn-primary">
                                             Save
                                         </button>
+                                        <i id="editTagLoader" style="display: none;"
+                                            class="fa fa-3x fa-spin fa-spinner"></i>
                                     </div>
                                 </div>
                             </div>
@@ -435,6 +300,9 @@
             </footer>
         </div>
     </div>
+
+
+
     <!-- General JS Scripts -->
     <script src="assets/js/app.min.js"></script>
     <!-- JS Libraies -->
@@ -443,22 +311,14 @@
     <script src="assets/js/page/advance-table.js"></script>
     <!-- Template JS File -->
     <script src="assets/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"
+        integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA=="
+        crossorigin="anonymous"></script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
-    <script>
-        $('#filterNamey').on('keyup', function () {
-            var value = $(this).val().toLowerCase();
-            $('#tbodyy tr').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-            });
-        });
-    </script>
-    <script>
-        deleteMe = () => {
-            if (confirm('Click OK to Delete Tag')) alert('Just a test To delete'); return false
+    <script src="custom_js/settings-tags.js"></script>
 
-        }
-    </script>
+
 </body>
 
 

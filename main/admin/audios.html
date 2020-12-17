@@ -16,7 +16,9 @@
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="assets/css/custom.css">
   <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
-  <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
+  <!-- <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css"> -->
+  <!-- <link rel="stylesheet" href="assets/bundles/select2/dist/css/select2.min.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 </head>
 
@@ -43,12 +45,12 @@
               class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="assets/img/user.png"
                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">Hello Sarah Smith</div>
+              <div class="dropdown-title" id="namey1"></div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far
 										fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="auth-login.html" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a id="logMeOut" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -58,7 +60,7 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+            <a href="dashboard.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
                 class="logo-name">KD</span>
             </a>
           </div>
@@ -67,8 +69,8 @@
               <img alt="image" src="assets/img/user.png">
             </div>
             <div class="sidebar-user-details">
-              <div class="user-name">Olivia Thomas</div>
-              <div class="user-role">Administrator</div>
+              <div class="user-name" id="user-name1"></div>
+              <div class="user-role">Super-Administrator</div>
               <div class="sidebar-userpic-btn">
 
               </div>
@@ -77,7 +79,7 @@
           <ul class="sidebar-menu">
             <!-- <li class="menu-header">Main</li> -->
             <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+              <a href="dashboard.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
               <a class="nav-link" href="create-post.html"><i data-feather="briefcase"></i><span>Create Post</span></a>
@@ -110,7 +112,7 @@
               <h4 class="page-title m-b-0">Posts</h4>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">
+              <a href="dashboard.html">
                 <i data-feather="home"></i></a>
             </li>
             <li class="breadcrumb-item">Audio Messages</li>
@@ -145,14 +147,14 @@
                     <h4>All Audios</h4>
                   </div>
                   <div class="card-body">
-                    <div class="float-left">
+                    <!-- <div class="float-left">
                       <select class="form-control selectric">
                         <option>--Action For Selected--</option>
                         <!-- <option>Export As Excel</option>
-                        <option>Export as PDF</option> -->
+                        <option>Export as PDF</option> --
                         <option>Delete Permanently</option>
                       </select>
-                    </div>
+                    </div> -->
                     <div class="float-right">
                       <form>
                         <div class="input-group">
@@ -163,243 +165,37 @@
                     </div>
                     <div class="clearfix mb-3"></div>
                     <div class="table-responsive">
-                      <table class="table table-striped">
+                      <i id="audioLoader" class="fa fa-3x fa-spin fa-spinner"></i>
+                      <table class="table table-striped" id="audioTable" style="display: none;">
                         <thead>
-                          <th class="pt-2">
+                          <!-- <th class="pt-2">
                             <div class="custom-checkbox custom-checkbox-table custom-control">
                               <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad"
                                 class="custom-control-input" id="checkbox-all">
                               <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                             </div>
-                          </th>
-                          <th>Author</th>
+                          </th> -->
+                          <th>#</th>
                           <th>Title</th>
-                          <th>Tags</th>
+                          <th>Author</th>
+                          <!-- <th>Tags</th> -->
                           <!-- <th>Description</th> -->
                           <th>Created At</th>
-                          <th>Streams/Downloads</th>
+                          <!-- <th>Streams/Downloads</th> -->
                           <th>Action</th>
                         </thead>
-                        <tbody id='tbodyy'>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-2">
-                                <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>
+                        <tbody id='audio_body'>
 
-                              <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle" width="35"
-                                data-toggle="title" title="">
-                              <span class="d-inline-block ml-1">Cara Stevens</span>
-
-                            </td>
-                            <td>Post Title 1
-
-                            </td>
-                            <td class="align-middle">
-                              <i class="material-icons col-red">local_offer</i>Faith
-                              <i class="material-icons col-brown">local_offer</i>Hope
-                            </td>
-                            <!-- <td>First coming of International representatives to Enugu, Hosted by Kingdom Diplomats</td> -->
-                            <td>10-02-2019</td>
-                            <td>34/50</td>
-                            <td>
-                              <div class="dropdown d-inline mr-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Actions
-                                </button>
-                                <div class="dropdown-menu" style="will-change: transform;">
-                                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                                    href="#">Edit</a>
-                                  <a class="dropdown-item" onclick="deleteMe()" href="#">Delete</a>
-                                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-3">
-                                <label for="checkbox-3" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>
-                              <img alt="image" src="assets/img/users/user-2.png" class="rounded-circle" width="35"
-                                data-toggle="title" title="">
-                              <span class="d-inline-block ml-1">Sarah Smith</span>
-                            </td>
-                            <td>Post Title 2
-
-                            </td>
-                            <td class="align-middle">
-                              <i class="material-icons col-red">local_offer</i>Faith
-                              <i class="material-icons col-blue">local_offer</i>Hope
-                            </td>
-                            <td>10-02-2019</td>
-                            <td>34/50</td>
-                            <td>
-                              <div class="dropdown d-inline mr-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Actions
-                                </button>
-                                <div class="dropdown-menu" style="will-change: transform;">
-                                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                                    href="#">Edit</a>
-                                  <a class="dropdown-item" onclick="deleteMe()" href="#">Delete</a>
-                                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-4">
-                                <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>
-                              <img alt="image" src="assets/img/users/user-3.png" class="rounded-circle" width="35"
-                                data-toggle="title" title="">
-                              <span class="d-inline-block ml-1">Rizal Fakhri</span>
-                            </td>
-                            <td>Post Title 3
-
-                            </td>
-                            <td class="align-middle">
-                              <i class="material-icons col-red">local_offer</i>Faith
-                              <i class="material-icons col-blue">local_offer</i>Hope
-                            </td>
-                            <td>10-02-2019</td>
-                            <td>34/50</td>
-                            <td>
-                              <div class="dropdown d-inline mr-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Actions
-                                </button>
-                                <div class="dropdown-menu" style="will-change: transform;">
-                                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                                    href="#">Edit</a>
-                                  <a class="dropdown-item" onclick="deleteMe()" href="#">Delete</a>
-                                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-5">
-                                <label for="checkbox-5" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>
-                              <img alt="image" src="assets/img/users/user-4.png" class="rounded-circle" width="35"
-                                data-toggle="title" title="">
-                              <span class="d-inline-block ml-1">Hasan Basri</span>
-                            </td>
-                            <td>Post Title 4
-
-                            </td>
-                            <td class="align-middle">
-                              <i class="material-icons col-red">local_offer</i>Faith
-                              <i class="material-icons col-blue">local_offer</i>Hope
-                            </td>
-                            <td>10-02-2019</td>
-                            <td>34/50</td>
-                            <td>
-                              <div class="dropdown d-inline mr-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Actions
-                                </button>
-                                <div class="dropdown-menu" style="will-change: transform;">
-                                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                                    href="#">Edit</a>
-                                  <a class="dropdown-item" onclick="deleteMe()" href="#">Delete</a>
-                                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input"
-                                  id="checkbox-1">
-                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>
-                              <img alt="image" src="assets/img/users/user-5.png" class="rounded-circle" width="35"
-                                data-toggle="title" title="">
-                              <span class="d-inline-block ml-1">Hasan Basri</span>
-                            </td>
-                            <td>Post Title 5
-
-                            </td>
-                            <td class="align-middle">
-                              <i class="material-icons col-red">local_offer</i>Faith
-                              <i class="material-icons col-blue">local_offer</i>Hope
-                            </td>
-                            <td>10-02-2019</td>
-                            <td>34/50</td>
-                            <td>
-                              <div class="dropdown d-inline mr-2">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton3"
-                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Actions
-                                </button>
-                                <div class="dropdown-menu" style="will-change: transform;">
-                                  <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal"
-                                    href="#">Edit</a>
-
-                                  <a class="dropdown-item" onclick="deleteMe()">Delete</a>
-                                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
                         </tbody>
                       </table>
 
                     </div>
                     <div class="float-right">
-                      <nav>
-                        <ul class="pagination">
-                          <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&laquo;</span>
-                              <span class="sr-only">Previous</span>
-                            </a>
-                          </li>
-                          <li class="page-item active">
-                            <a class="page-link" href="#">1</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                          </li>
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&raquo;</span>
-                              <span class="sr-only">Next</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
+                      <div class="container">
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination" id="pagination"></ul>
+                        </nav>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -418,42 +214,43 @@
                 </button>
               </div>
               <div class="modal-body">
+                <i id="auLoader" class="fa fa-3x fa-spin fa-spinner"></i>
 
-                <div>
+                <div id="auBody" style="display:none">
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                     <div class="col-sm-12 col-md-7">
-                      <input type="text" class="form-control" value="Audio 1">
+                      <input type="text" class="form-control required_aud" id="audioTitle">
                     </div>
                   </div>
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Author</label>
                     <div class="col-sm-12 col-md-7">
-                      <input type="text" class="form-control" value="Pastor ND">
+                      <input type="text" class="form-control required_aud" id="audioAuthor">
                     </div>
                   </div>
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                     <div class="col-sm-12 col-md-7">
-                      <textarea type="text" rows="4" class="form-control" placeholder="Not more than 50 characrters"
-                        value="The first coming of International representatives to Enugu, hosted by Kingdom diplomats"></textarea>
+                      <textarea type="text" rows="4" class="form-control required_aud"
+                        placeholder="Not more than 50 characrters" id="audioDesc"></textarea>
                     </div>
                   </div>
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date</label>
                     <div class="col-sm-12 col-md-7">
-                      <input type="date" class="form-control">
+                      <input type="date" class="form-control required_aud" id="audioDate">
                     </div>
                   </div>
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                     <div class="col-sm-12 col-md-7">
-                      <select class="form-control selectric" multiple="">
-                        <option value="">--Select--</option>
-                        <option selected>Faith</option>
-                        <option selected>Hope</option>
-                        <option>Love</option>
+
+                      <select class="form-control" multiple="multiple" id="audioTag"
+                        style="width:100% !important;max-width:800px !important; border-radius:30px !important; ">
+
                       </select>
+                      <i id="tagOptLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
                     </div>
                   </div>
 
@@ -463,19 +260,22 @@
                   <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
                     <div class="col-sm-12 col-md-7">
-                      <div id="image-preview" class="image-preview" style="background-image: url(assets/img/user.png);">
-                        <label for="image-upload" id="image-label">Choose File</label>
-                        <input type="file" name="image" id="image-upload" />
-                      </div>
+                      <!-- <div id="image-preview" class="image-preview">
+                        <label for="image-upload" id="image-label">Choose File</label> -->
+                      <input type="file" name="image" id="image-upload" />
+                      <!-- </div> -->
+                      <img src="" height="200" width="200" style="margin-top: 15px" alt="Image preview..."
+                        id="audioImg">
                     </div>
                   </div>
 
 
 
                   <div class="form-group text-left">
-                    <button type="submit" class="btn btn-lg btn-primary">
+                    <button type="submit" class="btn btn-lg btn-primary" id="audEditBtn">
                       Save
                     </button>
+                    <i id="audEditLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
                   </div>
                 </div>
               </div>
@@ -497,7 +297,10 @@
   <script src="assets/js/app.min.js"></script>
   <!-- JS Libraies -->
   <script src="assets/bundles/jquery-ui/jquery-ui.min.js"></script>
-  <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
+  <!-- <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+  <!-- <script src="assets/bundles/select2/dist/js/select2.full.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
   <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
   <script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
   <script src="assets/js/page/create-post.js"></script>
@@ -505,23 +308,14 @@
   <script src="assets/js/page/advance-table.js"></script>
   <!-- Template JS File -->
   <script src="assets/js/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"
+    integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA=="
+    crossorigin="anonymous"></script>
   <!-- Custom JS File -->
   <script src="assets/js/custom.js"></script>
-  <script>
-    $('#filterNamey').on('keyup', function () {
-      var value = $(this).val().toLowerCase();
-      $('#tbodyy tr').filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-      });
-    });
+  <script src="custom_js/audio.js"></script>
 
-  </script>
-  <script>
-    deleteMe = () => {
-      if (confirm('Click OK to Delete Audio')) alert('Just a test To delete'); return false
 
-    }
-  </script>
 </body>
 
 
