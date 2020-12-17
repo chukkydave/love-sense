@@ -17,7 +17,6 @@ function listAllAudios(page) {
 			Authorization: token1,
 		},
 		success: (res) => {
-			console.log(res);
 			if (res.status == 200) {
 				if (res.records.length > 0) {
 					let audios = '';
@@ -33,7 +32,7 @@ function listAllAudios(page) {
 						audios += `<div class="post-item border grey-bg col-4 col-md-3" >`;
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
-						audios += `<a href="single.html?${value.files[1].filename}">
+						audios += `<a href="single.html?${value.file_id}">
 				                                    <img alt="" src="images/blog/audio-bg.jpg">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
@@ -46,8 +45,7 @@ function listAllAudios(page) {
 						$(value.tags).each(function(i, v) {
 							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
 						});
-						audios += `<h2><a href="single.html?${value.files[1]
-							.filename}">${value.title}</a></h2>`;
+						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
 						audios += `<div class="post-author">
 				                                    <p>by ${value.author}</p>
 				                                </div>`;
@@ -63,8 +61,8 @@ function listAllAudios(page) {
 					// alert('hello');
 					// });
 
-					// $('#audioLoader').hide();
-					// $('#audioTable').show();
+					$('#audioLoader').hide();
+					$('#blogy').show();
 				}
 
 				if (res.totalPages) {
@@ -77,15 +75,17 @@ function listAllAudios(page) {
 					});
 				}
 			} else {
-				$('#audio_body').html(`<h5> Error Fetching Result</h5>`);
-				// $('#audioLoader').hide();
-				// $('#audioTable').show();
+				console.log(res);
+				$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+				$('#audioLoader').hide();
+				$('#blogy').show();
 			}
 		},
 		error: (res) => {
-			$('#audio_body').html(`<h5> Error Fetching Result</h5>`);
-			// $('#audioLoader').hide();
-			// $('#audioTable').show();
+			console.log(res);
+			$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+			$('#audioLoader').hide();
+			$('#blogy').show();
 		},
 	});
 }
