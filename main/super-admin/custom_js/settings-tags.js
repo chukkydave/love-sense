@@ -10,6 +10,7 @@ $(document).ready(function() {
 		let thisId = $(this).attr('id');
 		$('#editTagBtn').attr('dir', thisId);
 		$('#exampleModaledit').modal('show');
+		viewSingleTag(thisId);
 	});
 	$('#createTagBtn').on('click', function() {
 		if (isEmptyInput('.required_t')) {
@@ -255,6 +256,51 @@ function editTag() {
 			alert('Error!!');
 			$('#editTagLoader').hide();
 			$('#editTagBtn').show();
+		},
+	});
+}
+
+function viewSingleTag(id) {
+	var token1 = localStorage.getItem('token');
+	$('#tagName').hide();
+	$('#editTagNameLoader').show();
+	$('#tagColor').hide();
+	$('#editTagColorLoader').show();
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `${apiPaths}admin/single_tag/${id}`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token1,
+		},
+
+		success: function(res) {
+			if (res.status == 200) {
+				$('#tagName').val(res.tag.tag_name);
+				$('#tagColor').val(res.tag.tag_color);
+
+				$('#editTagNameLoader').hide();
+				$('#tagName').show();
+				$('#editTagColorLoader').hide();
+				$('#tagColor').show();
+			} else {
+				console.log(res);
+				$('#editTagNameLoader').hide();
+				$('#tagName').show();
+				$('#editTagColorLoader').hide();
+				$('#tagColor').show();
+			}
+		},
+		error(res) {
+			console.log(res);
+			$('#editTagNameLoader').hide();
+			$('#tagName').show();
+			$('#editTagColorLoader').hide();
+			$('#tagColor').show();
 		},
 	});
 }
