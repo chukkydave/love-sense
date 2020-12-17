@@ -56,7 +56,7 @@ function updateInfo() {
 		type: 'PATCH',
 		dataType: 'json',
 		cache: false,
-		url: `${apiPaths}admin/update_admin`,
+		url: `${apiPaths}admin/update_super_admin`,
 		headers: {
 			// 'Accept': 'application/json',
 			'Content-Type': 'application/json',
