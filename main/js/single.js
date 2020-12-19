@@ -18,7 +18,6 @@ function listSingleAudio() {
 			Authorization: token1,
 		},
 		success: (res) => {
-			console.log(res);
 			if (res.status == 200) {
 				if (res.result) {
 					let audio = '';
@@ -29,9 +28,10 @@ function listSingleAudio() {
 
 					audio += `<div class="post-item">
                                 <div class="post-item-wrap">
-                                    <div class="post-audio" style="width: 50%;">
+                                    <div class="post-audio">
                                         <a href="#">
-                                            <img alt="" src="images/blog/audio-bg.jpg">
+                                            <img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res
+												.result.files[0].filename}">
                                         </a>
                                         <audio class="video-js vjs-default-skin" controls controlsList="nodownload" preload="false" data-setup="{}">
                                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res

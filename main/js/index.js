@@ -29,11 +29,12 @@ function listAllAudios(page) {
 						let thisId = value.file_id;
 						let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
 
-						audios += `<div class="post-item border grey-bg col-4 col-md-3" >`;
+						audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt="" src="images/blog/audio-bg.jpg">
+				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+														.files[0].filename}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
 						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
