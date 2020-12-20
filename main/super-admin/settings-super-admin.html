@@ -16,6 +16,8 @@
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+
+
 </head>
 
 <body>
@@ -93,8 +95,8 @@
                                     data-feather="settings"></i><span>Settings</span></a>
                             <ul class="dropdown-menu" style="display: block;">
                                 <li><a href="settings-admins.html">Admins</a></li>
-                                <li><a href="settings-super-admin.html">Super Admins</a></li>
-                                <li class='active'><a href="settings-tags.html">Tags</a></li>
+                                <li class='active'><a href="settings-super-admin.html">Super Admins</a></li>
+                                <li><a href="settings-tags.html">Tags</a></li>
                                 <!-- <li><a href="activities.html">Activities</a></li> -->
                             </ul>
                         </li>
@@ -111,13 +113,13 @@
                 <section class="section">
                     <ul class="breadcrumb breadcrumb-style ">
                         <li class="breadcrumb-item">
-                            <h4 class="page-title m-b-0">Tags</h4>
+                            <h4 class="page-title m-b-0">Super Admins</h4>
                         </li>
                         <li class="breadcrumb-item">
                             <a href="dashboard.html">
                                 <i data-feather="home"></i></a>
                         </li>
-                        <li class="breadcrumb-item">Tags</li>
+                        <li class="breadcrumb-item">Super Admins</li>
                     </ul>
                     <div class="section-body">
 
@@ -125,15 +127,14 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>All Tags</h4>
+                                        <h4>All Super Admins</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="float-left">
 
                                             <div class="input-group">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#exampleModal">Create
-                                                    Tag</button>
+                                                    data-target="#exampleModal">Create Super Admin</button>
                                             </div>
                                         </div>
 
@@ -149,15 +150,17 @@
                                         </div>
                                         <div class="clearfix mb-3"></div>
                                         <div class="table-responsive">
-                                            <i id="tagLoader" class="fa fa-3x fa-spin fa-spinner"></i>
-                                            <table id="tagTable" style="display: none;" class="table table-striped">
+                                            <i id="adminModal" class="fa fa-3x fa-spin fa-spinner"></i>
+
+                                            <table id="adminTable" style="display: none;" class="table table-striped">
                                                 <thead>
-                                                    <th width="10%">#</th>
-                                                    <th width="40%">Tag</th>
-                                                    <th width="40%">Color</th>
-                                                    <th width="10%">Action</th>
+                                                    <th width="2%">#</th>
+                                                    <th width="30%">Name</th>
+                                                    <th width="30%">Email</th>
+                                                    <th width="30%">Phone</th>
+                                                    <th width="8%">Action</th>
                                                 </thead>
-                                                <tbody id='tag_body'>
+                                                <tbody id='admin_body'>
 
 
                                                 </tbody>
@@ -181,7 +184,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="formModal">Create Tag</h5>
+                                <h5 class="modal-title" id="formModal">Add Super Admin</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -190,39 +193,61 @@
 
                                 <div>
                                     <div class="form-group floating-addon">
-                                        <label>Tag Name</label>
+                                        <label>Name</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fas fa-bookmark"></i>
+                                                    <i class="far fa-user"></i>
                                                 </div>
                                             </div>
-                                            <input id="tag_name" type="text" class="form-control required_t"
-                                                name="tag_name" autofocus placeholder="Tag Name">
+                                            <input id="cName" type="text" class="form-control required_cr" name="cName"
+                                                autofocus placeholder="Name">
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
-                                        <label>Tag Color</label>
+                                        <label>Email</label>
                                         <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                            </div>
+                                            <input id="cEmail" type="email" class="form-control required_cr"
+                                                name="Email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group floating-addon">
+                                        <label>Phone</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                            </div>
+                                            <input id="cPhone" type="number" class="form-control required_cr"
+                                                name="Phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-group floating-addon">
+                                        <label>Password</label>
+                                        <div class="input-group">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <i toggle="#password"
+                                                        class="fa fa-fw fa-eye field-icon toggle-password"></i>
 
-                                            <select id="tag_color" class="form-control required_t" name="tag_color"
-                                                autofocus>
-                                                <option value="">--Select--</option>
-                                                <option value="red">Red</option>
-                                                <option value="yellow">Yellow</option>
-                                                <option value="blue">Blue</option>
-                                                <option value="green">Green</option>
-                                            </select>
+                                                </div>
+                                            </div>
+                                            <input id="password" type="password" class="form-control required_cr"
+                                                name="password" placeholder="Password">
                                         </div>
                                     </div>
 
-
-
                                     <div class="form-group text-left">
-                                        <button id="createTagBtn" class="btn btn-lg btn-primary">
-                                            Create
+                                        <button class="btn btn-lg btn-primary" id="createBtn">
+                                            Add
                                         </button>
-                                        <i id="createTagLoader" style="display: none;"
+                                        <i style="display: none;" id="createLoader"
                                             class="fa fa-3x fa-spin fa-spinner"></i>
                                     </div>
                                 </div>
@@ -230,59 +255,63 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="modal fade" id="exampleModaledit" tabindex="-1" role="dialog" aria-labelledby="formModal"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="formModal">Edit Tag</h5>
+                                <h5 class="modal-title" id="formModal">Edit Admin</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <i id="viewLoader" class="fa fa-3x fa-spin fa-spinner"></i>
 
-                                <div>
+                                <div style="display: none;" id="viewBody">
                                     <div class="form-group floating-addon">
-                                        <label>Tag Name</label>
+                                        <label>Name</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fas fa-bookmark"></i>
+                                                    <i class="far fa-user"></i>
                                                 </div>
                                             </div>
-                                            <input id="tagName" type="text" class="form-control required_te"
-                                                name="tagName" autofocus placeholder="Tag Name">
-                                            <i id="editTagNameLoader" style="display: none;"
-                                                class="fa fa-3x fa-spin fa-spinner"></i>
+                                            <input id="eName" type="text" class="form-control required_e" name="name"
+                                                autofocus placeholder="Name">
                                         </div>
                                     </div>
                                     <div class="form-group floating-addon">
-                                        <label>Tag Color</label>
+                                        <label>Email</label>
                                         <div class="input-group">
-
-                                            <select id="tagColor" class="form-control required_te" name="tagColor"
-                                                autofocus>
-                                                <option value="">--Select--</option>
-                                                <option value="red">Red</option>
-                                                <option value="yellow">Yellow</option>
-                                                <option value="blue">Blue</option>
-                                                <option value="green">Green</option>
-                                                <option value="purple">Purple</option>
-                                            </select>
-                                            <i id="editTagColorLoader" style="display: none;"
-                                                class="fa fa-3x fa-spin fa-spinner"></i>
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                            </div>
+                                            <input id="eEmail" type="email" class="form-control required_e" name="email"
+                                                placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group floating-addon">
+                                        <label>Phone</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-phone"></i>
+                                                </div>
+                                            </div>
+                                            <input id="ePhone" type="number" class="form-control required_e"
+                                                name="phone" placeholder="Phone">
                                         </div>
                                     </div>
 
 
-
                                     <div class="form-group text-left">
-                                        <button id="editTagBtn" class="btn btn-lg btn-primary">
+                                        <button id="editBtn" class="btn btn-lg btn-primary">
                                             Save
                                         </button>
-                                        <i id="editTagLoader" style="display: none;"
+                                        <i style="display: none;" id="editLoader"
                                             class="fa fa-3x fa-spin fa-spinner"></i>
                                     </div>
                                 </div>
@@ -301,9 +330,6 @@
             </footer>
         </div>
     </div>
-
-
-
     <!-- General JS Scripts -->
     <script src="assets/js/app.min.js"></script>
     <!-- JS Libraies -->
@@ -317,8 +343,7 @@
         crossorigin="anonymous"></script>
     <!-- Custom JS File -->
     <script src="assets/js/custom.js"></script>
-    <script src="custom_js/settings-tags.js"></script>
-
+    <script src="custom_js/settings-super-admin.js"></script>
 
 </body>
 
