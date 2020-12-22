@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	listSingleAudio();
+	listRecentAudio();
+	listPopularAudio();
 });
 
 function listSingleAudio() {
@@ -15,7 +17,7 @@ function listSingleAudio() {
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
-			Authorization: token1,
+			// Authorization: token1,
 		},
 		success: (res) => {
 			if (res.status == 200) {
@@ -31,11 +33,11 @@ function listSingleAudio() {
                                     <div class="post-audio">
                                         <a href="#">
                                             <img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res
-												.result.files[0].filename}">
+												.result.files[0].filename}/${res.result.file_id}">
                                         </a>
                                         <audio class="video-js vjs-default-skin" controls controlsList="nodownload" preload="false" data-setup="{}">
                                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res
-												.result.files[1].filename}" />
+												.result.files[1].filename}/${res.result.file_id}" />
                                         </audio>
                                         
                                         
@@ -47,7 +49,7 @@ function listSingleAudio() {
                                         <div class="post-meta">
                                             <span class="post-meta-date"><i class="fa fa-calendar-o"></i>${audioDate}</span>`;
 					$(res.result.tags).each(function(i, v) {
-						audio += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+						audio += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
 					});
 
 					audio += `<span class="post-meta-date">By ${res.result.author}</span>
@@ -60,10 +62,7 @@ function listSingleAudio() {
 
                                         <div class="post-tags">`;
 					$(res.result.tags).each(function(i, v) {
-						audio += `<a href="#">${v}</a> <a href="#">Convenant</a>
-                                                            <a href="#">Love</a>
-                                                            <a href="#">Hope</a>
-                                                        `;
+						audio += `<a href="#">${v.tag_name}</a>`;
 					});
 
 					audio += `</div></div>
@@ -93,4 +92,130 @@ function listSingleAudio() {
 			$('#blogy').show();
 		},
 	});
+}
+
+function listRecentAudio() {
+	var token1 = localStorage.getItem('token');
+
+	let audioId = window.location.search.substring(1);
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_recent`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			// Authorization: token1,
+		},
+		success: (res) => {
+			if (res.status == 200) {
+				if (res.count.length > 0) {
+					let audio = '';
+
+					$(res.count).each(function(i, v) {
+						let theDate = moment(v.files[0].uploadDate).fromNow();
+						audio += `<div class="post-thumbnail-entry">
+								<img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${v.files[0]
+									.filename}/${v.file_id}">
+								<div class="post-thumbnail-content">
+									<a href="single.html?${v.file_id}">${v.title}</a>
+									<span class="post-date"><i class="icon-clock"></i> ${theDate}</span>`;
+						$(v.tags).each(function(index, value) {
+							audio += `<span class="post-category"><i class="fa fa-tag" style="color:${value.tag_color} !important;"></i>
+										${value.tag_name}</span>`;
+						});
+						audio += `</div></div>`;
+					});
+
+					$('#recenty').html(audio);
+					$('#recentLoader').hide();
+					$('#recenty').show();
+				} else {
+					$('#recenty').html(`<h5 style="color:red"> No recent audio messages</h5>`);
+					$('#recentLoader').hide();
+					$('#recenty').show();
+				}
+			} else {
+				$('#recenty').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+				$('#recentLoader').hide();
+				$('#recenty').show();
+			}
+		},
+		error: (res) => {
+			$('#recenty').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+			$('#recentLoader').hide();
+			$('#recenty').show();
+		},
+	});
+}
+
+function listPopularAudio() {
+	var token1 = localStorage.getItem('token');
+
+	let audioId = window.location.search.substring(1);
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_stream`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			// Authorization: token1,
+		},
+		success: (res) => {
+			if (res.status == 200) {
+				if (res.count.length > 0) {
+					let audio = '';
+
+					$(res.count).each(function(i, v) {
+						let theDate = moment(v.files[0].uploadDate).fromNow();
+						audio += `<div class="post-thumbnail-entry">
+								<img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${v.files[0]
+									.filename}/${v.file_id}">
+								<div class="post-thumbnail-content">
+									<a href="single.html?${v.file_id}">${v.title}</a>
+									<span class="post-date"><i class="icon-clock"></i> ${theDate}</span>`;
+						$(v.tags).each(function(index, value) {
+							audio += `<span class="post-category"><i class="fa fa-tag" style="color:${value.tag_color} !important;"></i>
+										${value.tag_name}</span>`;
+						});
+						audio += `</div></div>`;
+					});
+
+					$('#populary').html(audio);
+					$('#popularLoader').hide();
+					$('#populary').show();
+				} else {
+					$('#populary').html(`<h5 style="color:red"> No popular audio messages</h5>`);
+					$('#popularLoader').hide();
+					$('#populary').show();
+				}
+			} else {
+				$('#populary').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+				$('#popularLoader').hide();
+				$('#populary').show();
+			}
+		},
+		error: (res) => {
+			$('#populary').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+			$('#popularLoader').hide();
+			$('#populary').show();
+		},
+	});
+}
+
+{
+	/* <div class="post-thumbnail-entry">
+	<img alt="" src="images/blog/thumbnail/7.jpg">
+	<div class="post-thumbnail-content">
+		<a href="#">The most happiest time of the day!</a>
+		<span class="post-date"><i class="icon-clock"></i> 11h ago</span>
+		<span class="post-category"><i class="fa fa-tag"></i>
+			Lifestyle</span>
+	</div>
+</div> */
 }

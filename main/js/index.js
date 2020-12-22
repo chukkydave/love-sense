@@ -34,7 +34,7 @@ function listAllAudios(page) {
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
 				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
-														.files[0].filename}">
+														.files[0].filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
 						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
