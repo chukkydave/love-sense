@@ -4,7 +4,7 @@ listAllAudios(1);
 
 function listAllAudios(page) {
 	var token1 = localStorage.getItem('token');
-	var page_limit = 10;
+	var page_limit = 12;
 
 	$.ajax({
 		type: 'GET',
@@ -62,6 +62,11 @@ function listAllAudios(page) {
 					// alert('hello');
 					// });
 
+					$('#audioLoader').hide();
+					$('#blogy').show();
+				} else {
+					console.log(res);
+					$('#blogy').html(`<h5 style="color:red"> No audio message record found</h5>`);
 					$('#audioLoader').hide();
 					$('#blogy').show();
 				}

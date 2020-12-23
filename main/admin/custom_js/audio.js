@@ -208,7 +208,7 @@ function viewAudio(idex) {
 					$('#audioImg').attr(
 						'src',
 						`https://streaming-audio-library.herokuapp.com/api/v1/file/${res.result
-							.files[0].filename}`,
+							.files[0].filename}/${res.result.file_id}`,
 					);
 
 					$('#auLoader').hide();

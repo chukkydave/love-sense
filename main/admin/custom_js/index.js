@@ -43,7 +43,7 @@ function login_user() {
 		dataType: 'json',
 		data: JSON.stringify(dataD),
 		cache: false,
-		url: 'https://streaming-audio-library.herokuapp.com/api/v1/super_admin/login',
+		url: 'https://streaming-audio-library.herokuapp.com/api/v1/admin/login',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -59,9 +59,9 @@ function login_user() {
 				localStorage.setItem('user_name', result.user.name);
 				localStorage.setItem('user_email', result.user.email);
 				localStorage.setItem('user_phone', result.user.phone_number);
+				localStorage.setItem('user_sm', result.user._id);
 				setTimeout(() => {
-					window.location.href =
-						'https://www.lovesense.online/main/super-admin/dashboard.html';
+					window.location.href = 'https://www.lovesense.online/main/admin/dashboard.html';
 				}, 2000);
 				// checkLoggedin();
 			} else {
@@ -76,7 +76,7 @@ function login_user() {
 			console.log(result);
 			$('#preloadert').hide();
 			$('#login_button').show();
-			alert(result.message);
+			alert(result.responseJSON.error);
 		},
 	});
 }

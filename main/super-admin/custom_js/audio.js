@@ -116,6 +116,12 @@ function listAudios(page) {
 					$('#audio_body').html(audio_table);
 					$('#audioLoader').hide();
 					$('#audioTable').show();
+				} else {
+					$('#audio_body').html(
+						`<tr class="even"> <td class=" " colspan="6">No record found</td></tr>`,
+					);
+					$('#audioLoader').hide();
+					$('#audioTable').show();
 				}
 
 				if (res.totalPages) {
@@ -208,7 +214,7 @@ function viewAudio(idex) {
 					$('#audioImg').attr(
 						'src',
 						`https://streaming-audio-library.herokuapp.com/api/v1/file/${res.result
-							.files[0].filename}`,
+							.files[0].filename}/${res.result.file_id}`,
 					);
 
 					$('#auLoader').hide();

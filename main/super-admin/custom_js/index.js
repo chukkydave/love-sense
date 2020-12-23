@@ -77,7 +77,7 @@ function login_user() {
 			console.log(result);
 			$('#preloadert').hide();
 			$('#login_button').show();
-			alert(result.message);
+			alert(result.responseJSON.error);
 		},
 	});
 }

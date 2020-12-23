@@ -9,6 +9,7 @@ $(document).ready(function() {
 	$('input#image-upload').on('change', function() {
 		let file = this.files[0];
 		postImgy = file;
+		previewFile();
 	});
 
 	$('input#postFile').on('change', function() {
@@ -71,6 +72,7 @@ function createPost() {
 	data.append('description', desc);
 	data.append('image', thumb);
 	data.append('file', filer);
+	data.append('tag', tags);
 
 	var token1 = localStorage.getItem('token');
 
@@ -156,9 +158,32 @@ function listTags() {
 		// jqXHR, textStatus, errorThrown
 		error(response) {
 			console.log(response);
-			$('#postTag').append(`<option value="">Error Loading result!!</option>`);
+			$('#postTag').append(`<option value="error">Error Loading result!!</option>`);
 			$('#tagOptLoader').hide();
 			$('#postTag').show();
 		},
 	});
+}
+
+function previewFile() {
+	var preview = document.querySelector('img');
+	var file = document.querySelector('input[type=file]').files[0];
+	var reader = new FileReader();
+
+	reader.addEventListener(
+		'load',
+		function(e) {
+			// convert image file to base64 string
+			var img = new Image();
+			img.src = e.target.result;
+
+			// fileName = reader.result;
+			$('#audioImg').attr('src', reader.result);
+		},
+		false,
+	);
+
+	if (file) {
+		reader.readAsDataURL(file);
+	}
 }

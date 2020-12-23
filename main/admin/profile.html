@@ -85,15 +85,7 @@
               <a class="nav-link" href="audios.html"><i data-feather="grid"></i><span>View All Audios</span></a>
             </li>
 
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="settings"></i><span>Settings</span></a>
-              <ul class="dropdown-menu" style="display: none;">
-                <li><a href="settings-admins.html">Admins</a></li>
-                <li><a href="settings-tags.html">Tags</a></li>
-                <!-- <li><a href="activities.html">Activities</a></li> -->
-              </ul>
-            </li>
+
 
 
 
@@ -260,7 +252,8 @@
                     </ul>
                     <div class="tab-content tab-bordered" id="myTab3Content">
                       <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
-                        <div class="row">
+                        <i id="viewLoader" class="fa fa-3x fa-spin fa-spinner"></i>
+                        <div class="row" style="display: none;" id="viewBodyi">
                           <div class="col-md-3 col-6 b-r">
                             <strong>Full Name</strong>
                             <br>
@@ -276,6 +269,7 @@
                             <br>
                             <p class="text-muted" id="myEmail"></p>
                           </div>
+
 
                         </div>
 

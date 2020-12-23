@@ -1,3 +1,6 @@
+$(document).ready(function() {
+	viewAdmin();
+});
 $('#changeBtn').on('click', function() {
 	if (isEmptyInput('.required_f')) {
 		updateInfo();
@@ -10,12 +13,12 @@ $('#changeBtn2').on('click', function() {
 	}
 });
 
-let namer = localStorage.getItem('user_name');
-let emailer = localStorage.getItem('user_email');
-let phoner = localStorage.getItem('user_phone');
-$('#myName').html(namer);
-$('#myEmail').html(emailer);
-$('#myPhone').html(phoner);
+// let namer = localStorage.getItem('user_name');
+// let emailer = localStorage.getItem('user_email');
+// let phoner = localStorage.getItem('user_phone');
+// $('#myName').html(namer);
+// $('#myEmail').html(emailer);
+// $('#myPhone').html(phoner);
 
 function isEmptyInput(first) {
 	let isEmpty = false;
@@ -56,7 +59,7 @@ function updateInfo() {
 		type: 'PATCH',
 		dataType: 'json',
 		cache: false,
-		url: `${apiPaths}admin/update_super_admin`,
+		url: `${apiPaths}admin/update_admin`,
 		headers: {
 			// 'Accept': 'application/json',
 			'Content-Type': 'application/json',
@@ -102,7 +105,7 @@ function changePassword() {
 		type: 'PATCH',
 		dataType: 'json',
 		cache: false,
-		url: `${apiPaths}super_admin/change_password`,
+		url: `${apiPaths}admin/change_password`,
 		headers: {
 			// 'Accept': 'application/json',
 			'Content-Type': 'application/json',
@@ -125,6 +128,49 @@ function changePassword() {
 			alert(res.responseText);
 			$('#changeLoader2').hide();
 			$('#changeBtn2').show();
+		},
+	});
+}
+
+function viewAdmin() {
+	var token2 = localStorage.getItem('token');
+	var idt = localStorage.getItem('user_sm');
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		url: `${apiPaths}admin/view/${idt}`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: token2,
+		},
+		success: function(res) {
+			if (res.status == 200 || res.status == 201) {
+				$('#myName').html(res.result.name);
+				$('#myEmail').html(res.result.email);
+				$('#myPhone').html(res.result.phone_number);
+				$('#cName').val(res.result.name);
+				$('#cEmail').val(res.result.email);
+				$('#cPhone').val(res.result.phone_number);
+				$('#viewLoader').hide();
+				$('#viewBodyi').show();
+			} else {
+				console.log(res);
+				$('#myName').html('Error');
+				$('#myEmail').html('Error');
+				$('#myPhone').html('Error');
+				$('#viewLoader').hide();
+				$('#viewBodyi').show();
+			}
+		},
+		error: function(res) {
+			console.log(res);
+			$('#myName').html('Error');
+			$('#myEmail').html('Error');
+			$('#myPhone').html('Error');
+			$('#viewLoader').hide();
+			$('#viewBodyi').show();
 		},
 	});
 }

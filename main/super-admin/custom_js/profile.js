@@ -2,9 +2,9 @@ $(document).ready(function() {
 	viewAdmin();
 });
 $('#changeBtn').on('click', function() {
-	if (isEmptyInput('.required_f')) {
-		updateInfo();
-	}
+	// if (isEmptyInput('.required_f')) {
+	updateInfo();
+	// }
 });
 
 $('#changeBtn2').on('click', function() {
@@ -71,7 +71,7 @@ function updateInfo() {
 				alert('Succesful');
 				$('#changeLoader').hide();
 				$('#changeBtn').show();
-				window.location.reload;
+				window.location.reload();
 			} else {
 				alert('Error!!');
 				$('#changeLoader').hide();
@@ -117,7 +117,7 @@ function changePassword() {
 				alert('Succesful');
 				$('#changeLoader2').hide();
 				$('#changeBtn2').show();
-				window.location.reload;
+				window.location.reload();
 			} else {
 				alert('Error!!');
 				$('#changeLoader2').hide();
@@ -150,6 +150,9 @@ function viewAdmin() {
 				$('#myName').html(res.result.name);
 				$('#myEmail').html(res.result.email);
 				$('#myPhone').html(res.result.phone_number);
+				$('#cName').val(res.result.name);
+				$('#cEmail').val(res.result.email);
+				$('#cPhone').val(res.result.phone_number);
 				$('#viewLoader').hide();
 				$('#viewBodyi').show();
 			} else {

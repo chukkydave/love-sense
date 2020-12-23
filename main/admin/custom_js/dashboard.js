@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	noOfStreams();
-	noOfDownloads();
+	// noOfStreams();
+	// noOfDownloads();
 });
 
 function noOfStreams() {

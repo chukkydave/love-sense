@@ -70,7 +70,7 @@
             </div>
             <div class="sidebar-user-details">
               <div class="user-name" id="user-name1"></div>
-              <div class="user-role">Super-Administrator</div>
+              <div class="user-role">Administrator</div>
               <div class="sidebar-userpic-btn">
 
               </div>
@@ -87,15 +87,7 @@
             <li class="dropdown">
               <a class="nav-link" href="audios.html"><i data-feather="grid"></i><span>View All Audios</span></a>
             </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="settings"></i><span>Settings</span></a>
-              <ul class="dropdown-menu" style="display: none;">
-                <li><a href="settings-admins.html">Admins</a></li>
-                <li><a href="settings-tags.html">Tags</a></li>
-                <!-- <li><a href="activities.html">Activities</a></li> -->
-              </ul>
-            </li>
+
 
 
 
@@ -152,12 +144,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tags</label>
                       <div class="col-sm-12 col-md-7">
-                        <!-- <select id="postTag" class="form-control selectric required_po" multiple="">
-                          <option value="">--Select--</option>
-                          <option>Faith</option>
-                          <option>Hope</option>
-                          <option>Love</option>
-                        </select> -->
+
                         <select class="form-control select2 required_po" multiple="multiple" id="postTag"
                           style="width:100% !important;max-width:800px !important; border-radius:30px !important; ">
 
@@ -166,30 +153,48 @@
                       </div>
                     </div>
 
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="file" id="image-upload" class="form-control required_po"
+                          accept="image/jpg,image/png,image/jpeg,image/gif">
+                        <img src="" height="200" width="200" style="margin-top: 15px" alt="Image preview..."
+                          id="audioImg">
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">File</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input id="postFile" type="file" class="form-control required_po">
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                      <div class="col-sm-12 col-md-7">
+                        <button id="postBtn" class="btn btn-primary">Create Post</button>
+                        <i id="postLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
+                      </div>
+                    </div>
+
 
                   </div>
+
+
+
+
                   <!-- <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                    <div class="col-sm-12 col-md-7">
-                      <textarea class="summernote-simple"></textarea>
-                      </div>
-                    </div> -->
-                  <div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Thumbnail</label>
                     <div class="col-sm-12 col-md-7">
-                      <div id="image-preview" class="image-preview">
-                        <label for="image-upload" id="image-label">Choose File</label>
-                        <input class="required_po" type="file" name="image" id="image-upload"
-                          accept="image/jpg,image/png,image/jpeg,image/gif" />
-                      </div>
+
+                      <input class="required_po form-control" type="file" name="image" id="image-upload"
+                        accept="image/jpg,image/png,image/jpeg,image/gif" />
+
                     </div>
-                  </div>
-                  <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">File</label>
-                    <div class="col-sm-12 col-md-7">
-                      <input id="postFile" type="file" class="form-control required_po">
-                    </div>
-                  </div>
+                    <img src="" height="200" width="200" style="margin-top: 15px" alt="Image preview..." id="audioImg">
+                  </div> -->
+
                   <!--<div class="form-group row mb-4">
                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                     <div class="col-sm-12 col-md-7">
@@ -200,13 +205,7 @@
                       </select>
                     </div>
                   </div> -->
-                  <div class="form-group row mb-4">
-                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                    <div class="col-sm-12 col-md-7">
-                      <button id="postBtn" class="btn btn-primary">Create Post</button>
-                      <i id="postLoader" style="display: none;" class="fa fa-3x fa-spin fa-spinner"></i>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
