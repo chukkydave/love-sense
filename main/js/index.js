@@ -1,6 +1,18 @@
-// $(document).ready(function () {
-listAllAudios(1);
-// });
+$(document).ready(function() {
+	listAllAudios(1);
+
+	$('#showAll').click(function() {
+		$('#blogy').hide();
+		$('#audioLoader').show();
+		listAllAudios(1);
+	});
+	$('#recentAll').click(function() {
+		listRecentAudio();
+	});
+	$('#popularAll').click(function() {
+		listPopularAudio();
+	});
+});
 
 function listAllAudios(page) {
 	var token1 = localStorage.getItem('token');
@@ -79,6 +91,168 @@ function listAllAudios(page) {
 							listAllAudios(page);
 						},
 					});
+				}
+			} else {
+				console.log(res);
+				$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+				$('#audioLoader').hide();
+				$('#blogy').show();
+			}
+		},
+		error: (res) => {
+			console.log(res);
+			$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+			$('#audioLoader').hide();
+			$('#blogy').show();
+		},
+	});
+}
+
+function listRecentAudio() {
+	$('#blogy').hide();
+	$('#audioLoader').show();
+	var token1 = localStorage.getItem('token');
+
+	let audioId = window.location.search.substring(1);
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_recent`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			// Authorization: token1,
+		},
+		success: (res) => {
+			if (res.status == 200) {
+				if (res.count.length > 0) {
+					let audios = '';
+
+					$(res.count).each((index, value) => {
+						let thisId = value.file_id;
+						let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
+
+						audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
+						audios += `<div class="post-item-wrap">`;
+						audios += `<div class="post-audio">`;
+						audios += `<a href="single.html?${value.file_id}">
+				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+														.files[0].filename}/${value.file_id}">
+				                                </a>`;
+						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
+						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+						// 								.files[1].filename}" />
+						//                         </audio>`;
+						audios += `</div>`;
+						audios += `<div class="post-item-description">`;
+						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
+						$(value.tags).each(function(i, v) {
+							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+						});
+						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
+						audios += `<div class="post-author">
+				                                    <p>by ${value.author}</p>
+				                                </div>`;
+						audios += `</div>`;
+						audios += `</div>`;
+						audios += `</div>`;
+					});
+
+					$('#blogy').html(audios);
+					// $(window).load(function() {
+					// alert('hello');
+					// });
+
+					$('#audioLoader').hide();
+					$('#blogy').show();
+				} else {
+					console.log(res);
+					$('#blogy').html(`<h5 style="color:red"> No audio message record found</h5>`);
+					$('#audioLoader').hide();
+					$('#blogy').show();
+				}
+			} else {
+				console.log(res);
+				$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+				$('#audioLoader').hide();
+				$('#blogy').show();
+			}
+		},
+		error: (res) => {
+			console.log(res);
+			$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
+			$('#audioLoader').hide();
+			$('#blogy').show();
+		},
+	});
+}
+
+function listPopularAudio() {
+	$('#blogy').hide();
+	$('#audioLoader').show();
+	var token1 = localStorage.getItem('token');
+
+	let audioId = window.location.search.substring(1);
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_stream`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			// Authorization: token1,
+		},
+		success: (res) => {
+			if (res.status == 200) {
+				if (res.count.length > 0) {
+					let audios = '';
+
+					$(res.count).each((index, value) => {
+						let thisId = value.file_id;
+						let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
+
+						audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
+						audios += `<div class="post-item-wrap">`;
+						audios += `<div class="post-audio">`;
+						audios += `<a href="single.html?${value.file_id}">
+				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+														.files[0].filename}/${value.file_id}">
+				                                </a>`;
+						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
+						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+						// 								.files[1].filename}" />
+						//                         </audio>`;
+						audios += `</div>`;
+						audios += `<div class="post-item-description">`;
+						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
+						$(value.tags).each(function(i, v) {
+							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+						});
+						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
+						audios += `<div class="post-author">
+				                                    <p>by ${value.author}</p>
+				                                </div>`;
+						audios += `</div>`;
+						audios += `</div>`;
+						audios += `</div>`;
+					});
+
+					$('#blogy').html(audios);
+					// $(window).load(function() {
+					// alert('hello');
+					// });
+
+					$('#audioLoader').hide();
+					$('#blogy').show();
+				} else {
+					console.log(res);
+					$('#blogy').html(`<h5 style="color:red"> No audio message record found</h5>`);
+					$('#audioLoader').hide();
+					$('#blogy').show();
 				}
 			} else {
 				console.log(res);

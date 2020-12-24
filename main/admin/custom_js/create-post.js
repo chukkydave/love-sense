@@ -65,6 +65,12 @@ function createPost() {
 		filer = postFiley;
 	}
 
+	let tag_nameArr = [];
+
+	$('.select2-selection__choice').each(function(i, v) {
+		tag_nameArr.push($(v).attr('title'));
+	});
+
 	let data = new FormData();
 	data.append('title', title);
 	data.append('author', author);
@@ -72,7 +78,14 @@ function createPost() {
 	data.append('description', desc);
 	data.append('image', thumb);
 	data.append('file', filer);
-	data.append('tag', tags);
+	$(tag_nameArr).each(function(i, v) {
+		data.append(`tags[${i}][tag_name]`, v);
+	});
+	$(tags).each(function(i, v) {
+		data.append(`tags[${i}][tag_color]`, v);
+	});
+	// data.append('tag', tags);
+	console.log(data);
 
 	var token1 = localStorage.getItem('token');
 
@@ -148,7 +161,7 @@ function listTags() {
 			var options = '';
 
 			$(res.tagsrecords).each(function(i, v) {
-				options += `<option value="${v._id}">${toTitleCase(v.tag_name)}</option>`;
+				options += `<option value="${v.tag_color}">${toTitleCase(v.tag_name)}</option>`;
 			});
 
 			$('#postTag').append(options);
@@ -158,7 +171,7 @@ function listTags() {
 		// jqXHR, textStatus, errorThrown
 		error(response) {
 			console.log(response);
-			$('#postTag').append(`<option value="error">Error Loading result!!</option>`);
+			$('#postTag').append(`<option value="">Error Loading result!!</option>`);
 			$('#tagOptLoader').hide();
 			$('#postTag').show();
 		},

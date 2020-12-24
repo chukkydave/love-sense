@@ -10,6 +10,7 @@ $(document).ready(function() {
 
 	$(document).on('click', '.deleteMe .editUs', function() {
 		let particularIde = $(this).attr('id');
+
 		viewAudio(particularIde);
 	});
 	$('#audEditBtn').on('click', function() {
@@ -116,6 +117,12 @@ function listAudios(page) {
 					$('#audio_body').html(audio_table);
 					$('#audioLoader').hide();
 					$('#audioTable').show();
+				} else {
+					$('#audio_body').html(
+						`<tr class="even"> <td class=" " colspan="6">No record found</td></tr>`,
+					);
+					$('#audioLoader').hide();
+					$('#audioTable').show();
 				}
 
 				if (res.totalPages) {
@@ -181,6 +188,9 @@ function deleteMe(idex) {
 }
 
 function viewAudio(idex) {
+	$('#auBody').hide();
+	$('#auLoader').show();
+	$('#audioTag').val('').select2();
 	var token2 = localStorage.getItem('token');
 	$('#audEditBtn').attr('dir', idex);
 	// if (idex != '') {
@@ -203,8 +213,10 @@ function viewAudio(idex) {
 					$('#audioAuthor').val(res.result.author);
 					$('#audioDesc').val(res.result.description);
 					$('#audioDate').val(res.result.date);
-					$('#audioTag').val(res.result.tags).select2();
-					console.log(res.result.files);
+					$(res.result.tags).each(function(i, v) {
+						$('#audioTag').val(v.tag_color).select2();
+					});
+
 					$('#audioImg').attr(
 						'src',
 						`https://streaming-audio-library.herokuapp.com/api/v1/file/${res.result
@@ -335,7 +347,7 @@ function listTags() {
 			var options = '';
 
 			$(res.tagsrecords).each(function(i, v) {
-				options += `<option value="${v._id}">${toTitleCase(v.tag_name)}</option>`;
+				options += `<option value="${v.tag_color}">${toTitleCase(v.tag_name)}</option>`;
 			});
 
 			$('#audioTag').append(options);
@@ -379,6 +391,9 @@ $('#exampleModal').on('hide.bs.modal', function() {
 	$('#image-upload').val('');
 	$('#audioImg').attr('src', '');
 	$('.required_aud').val('');
+	// $('.select2-selection__rendered li').each(function(i, v) {
+	// 	$(v).removeClass('select2-selection__choice');
+	// });
 });
 
 // deleteMe = () => {

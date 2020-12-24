@@ -71,7 +71,7 @@ function updateInfo() {
 				alert('Succesful');
 				$('#changeLoader').hide();
 				$('#changeBtn').show();
-				window.location.reload;
+				window.location.reload();
 			} else {
 				alert('Error!!');
 				$('#changeLoader').hide();
@@ -117,7 +117,7 @@ function changePassword() {
 				alert('Succesful');
 				$('#changeLoader2').hide();
 				$('#changeBtn2').show();
-				window.location.reload;
+				window.location.reload();
 			} else {
 				alert('Error!!');
 				$('#changeLoader2').hide();

@@ -67,7 +67,7 @@ function listSingleAudio() {
 
 					audio += `</div></div>
                                     <form method="get" action="https://streaming-audio-library.herokuapp.com/api/v1/download/${res
-										.result.files[1].filename}">
+										.result.files[1].filename}/${res.result.file_id}">
                                     
                                         <button class="btn btn-outline" type="submit"><i class="fa fa-download"></i>  Download!</button>
                                             </form>
