@@ -14,9 +14,9 @@ $(document).ready(function() {
 		viewAudio(particularIde);
 	});
 	$('#audEditBtn').on('click', function() {
-		if (isEmptyInput('.required_aud')) {
-			editAudio();
-		}
+		// if (isEmptyInput('.required_aud')) {
+		editAudio();
+		// }
 	});
 	$('input#image-upload').on('change', function() {
 		let file = this.files[0];
@@ -208,14 +208,16 @@ function viewAudio(idex) {
 		success: function(res) {
 			if (res.status == 200) {
 				if (res.result.files) {
+					let allTags = [];
 					// $(res.result.files).each(function(i, v) {
 					$('#audioTitle').val(res.result.title);
 					$('#audioAuthor').val(res.result.author);
 					$('#audioDesc').val(res.result.description);
 					$('#audioDate').val(res.result.date);
 					$(res.result.tags).each(function(i, v) {
-						$('#audioTag').val(v.tag_color).select2();
+						allTags.push(v.tag_color);
 					});
+					$('#audioTag').val(allTags).select2();
 
 					$('#audioImg').attr(
 						'src',
@@ -269,7 +271,7 @@ function editAudio() {
 	$('#audioAuthor').val();
 	$('#audioDesc').val();
 	$('#audioDate').val();
-	$('#audioTag').val();
+	let tagy = $('#audioTag').val();
 
 	let thumb;
 	if (postImgy == undefined) {
@@ -278,11 +280,20 @@ function editAudio() {
 		thumb = postImgy;
 	}
 
+	let tagArr = [];
+
+	$('.select2-selection__choice').each(function(i, v) {
+		tagArr.push($(v).attr('title'));
+	});
+
+	let alltagArr = tagArr.map((item, index) => ({ tag_name: item, tag_color: tagy[index] }));
+
 	let data = {
 		title: $('#audioTitle').val(),
 		author: $('#audioAuthor').val(),
 		date: $('#audioDate').val(),
 		description: $('#audioDesc').val(),
+		tags: alltagArr,
 	};
 
 	var token1 = localStorage.getItem('token');

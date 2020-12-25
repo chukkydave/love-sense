@@ -109,7 +109,7 @@ function createPost() {
 				$('#postLoader').hide();
 				$('#postBtn').show();
 				$('.required_po').val('');
-				window.location.reload();
+				window.location.reload;
 				// $('#createTagLoader').hide();
 				// $('#createTagBtn').show();
 				// $('#tag_name').val('');
