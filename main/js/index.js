@@ -19,6 +19,8 @@ $(document).ready(function() {
 });
 
 function listAllAudios(page) {
+	$('#blogy').hide();
+	$('#audioLoader').show();
 	var token1 = localStorage.getItem('token');
 	var page_limit = 12;
 
