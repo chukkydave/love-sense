@@ -12,6 +12,27 @@
 
 <link href="css/plugins.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<style>
+    @media (min-width:961px) {
+        .onlyus {
+            margin-top: 5px !important;
+        }
+    }
+
+    @media (min-width:1025px) {
+        .onlyus {
+            margin-top: 5px !important;
+        }
+    }
+
+    @media (min-width:1281px) {
+        .onlyus {
+            margin-top: 5px !important;
+        }
+    }
+</style>
 </head>
 
 <body>
@@ -23,8 +44,10 @@
 
                     <div id="logo">
                         <a href="#">
-                            <span class="logo-default">KD</span>
-                            <span class="logo-dark">KD</span>
+                            <img class="logo-default" src="images/slider/logo80.png" alt="KD">
+                            <img class="logo-dark" src="images/slider/logo80.png" alt="KD">
+                            <!-- <span class="logo-default">KD</span>
+                            <span class="logo-dark">KD</span> -->
                         </a>
                     </div>
 
@@ -68,36 +91,38 @@
 
         <div id="slider" class="inspiro-slider slider-fullscreen dots-creative" data-height-xs="360">
 
-            <div class="slide kenburns" style="background-image:url('images/slider/100.jpg');">
+            <div class="slide kenburns" style="background-image:url('images/slider/kdslide1.jpg');">
                 <div class="bg-overlay"></div>
                 <div class="container">
                     <div class="slide-captions text-center text-light">
 
                         <span class="strong">welcome to Kingdom Diplomat</span>
                         <h2 class="text-dark">Experience <br>God </h2>
-                        <!-- <a class="btn" href="#">Purchase Now</a>
-                        <a class="btn btn-light">Purchase</a> -->
+
 
                     </div>
                 </div>
             </div>
 
 
-            <div class="slide kenburns" style="background-image:url('images/slider/105.jpg');">
+            <div class="slide kenburns" style="background-image:url('images/slider/kdslide3.jpg');">
                 <div class="bg-overlay"></div>
                 <div class="container">
                     <div class="slide-captions text-center text-light">
 
                         <span class="strong">Welcome to Church Online</span>
                         <h2 class="text-dark">God is <br>Here</h2>
-                        <!-- <a class="btn" href="#">Purchase Now</a>
-                        <a class="btn btn-light">Purchase</a> -->
+
 
                     </div>
                 </div>
             </div>
 
         </div>
+
+
+
+
 
         <section id="page-content" class="sidebar-right">
             <div class="container">
@@ -110,13 +135,39 @@
                         <li id="showAll"><a>Show All</a></li>
                         <li id="recentAll"><a>Recent</a></li>
                         <li id="popularAll"><a>Popular</a></li>
-                        <li>
+                        <!-- <li>
                             <div class="input-group">
                                 <input type="text" aria-required="true" name="q" class="form-control widget-search-form"
                                     placeholder="Search for audio...">
-                                <!-- <div class="input-group-append">
+                                <div class="input-group-append">
                                         <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                                    </div> -->
+                                    </div> 
+                            </div>
+                        </li> -->
+                        <li><a class="btn btn-light" data-toggle="collapse" href="#collapseExamplery" role="button"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                Filter <i class="icon-chevron-down"></i>
+                            </a></li>
+                        <li>
+                            <div class="collapse" id="collapseExamplery">
+                                <ul class="row">
+                                    <li class="col-xl-3 col-lg-4 col-md-6 col-sm-12"><input type="text" id="fTitle"
+                                            name="title" class="form-control" placeholder="Title"></li>
+                                    <li class="col-xl-3 col-lg-4 col-md-6 col-sm-12"><input type="text" id="fAuthor"
+                                            name="author" class="form-control" placeholder="Author"></li>
+                                    <li class="col-xl-3 col-lg-4 col-md-6 col-sm-12"><input type="date" id="fDate"
+                                            name="date" class="form-control" placeholder="Date"></li>
+                                    <li class="col-xl-3 col-lg-4 col-md-6 col-sm-12 onlyus"><select name="" id="fTag">
+                                            <option value=""> -- Tag -- </option>
+                                        </select>
+                                        <i id="tagOptLoader" style="display: none;"
+                                            class="fa fa-3x fa-spin fa-spinner"></i>
+
+                                    </li>
+                                    <li class="col-xl-3 col-lg-3 col-md-3 col-sm-3 onlyus"><button type="button"
+                                            class="btn btn-success" id="fBtn">Filter</button>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <!-- <li><a href="#" data-category=".bc-economics">Love</a></li>
@@ -131,7 +182,7 @@
                 <!-- <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                 </div> -->
-                <i id="audioLoader" style="font-size: 70px;" class="fa fa-3x fa-spin fa-spinner"></i>
+                <i id="audioLoader" style="font-size: 50px;" class="fa fa-3x fa-spin fa-spinner"></i>
 
 
                 <div id="blogy" style="display: none;" class="row">
@@ -262,6 +313,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
     <script src="js/functions.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
     <script src="js/index.js"></script>
 </body>
 

@@ -60,12 +60,7 @@ function listSingleAudio() {
                                             <!--<small><cite>Joshua 1 : 8</cite></small>-->
                                         </div>
 
-                                        <div class="post-tags">`;
-					$(res.result.tags).each(function(i, v) {
-						audio += `<a href="#">${v.tag_name}</a>`;
-					});
-
-					audio += `</div></div>
+                                        </div>
                                     <form method="get" action="https://streaming-audio-library.herokuapp.com/api/v1/download/${res
 										.result.files[1].filename}/${res.result.file_id}">
                                     

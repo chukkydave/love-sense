@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	listAllAudios(1);
+	listTags();
 
 	$('#showAll').click(function() {
 		$('#blogy').hide();
@@ -12,11 +13,21 @@ $(document).ready(function() {
 	$('#popularAll').click(function() {
 		listPopularAudio();
 	});
+	$('#fBtn').click(function() {
+		listAllAudios(1);
+	});
 });
 
 function listAllAudios(page) {
 	var token1 = localStorage.getItem('token');
 	var page_limit = 12;
+
+	let data = {
+		author: $('#fAuthor').val(),
+		title: $('#fTitle').val(),
+		date: $('#fDate').val(),
+		tag_name: $('#fTag').val(),
+	};
 
 	$.ajax({
 		type: 'GET',
@@ -28,6 +39,7 @@ function listAllAudios(page) {
 			'Content-Type': 'application/json',
 			Authorization: token1,
 		},
+		data: JSON.stringify(data),
 		success: (res) => {
 			if (res.status == 200) {
 				if (res.records.length > 0) {
@@ -45,7 +57,7 @@ function listAllAudios(page) {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+				                                    <img alt=""   src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
 														.files[0].filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
@@ -56,7 +68,7 @@ function listAllAudios(page) {
 						audios += `<div class="post-item-description">`;
 						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
 						$(value.tags).each(function(i, v) {
-							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+							audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
 						});
 						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
 						audios += `<div class="post-author">
@@ -138,7 +150,7 @@ function listRecentAudio() {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+				                                    <img alt=""  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
 														.files[0].filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
@@ -149,7 +161,7 @@ function listRecentAudio() {
 						audios += `<div class="post-item-description">`;
 						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
 						$(value.tags).each(function(i, v) {
-							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+							audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
 						});
 						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
 						audios += `<div class="post-author">
@@ -219,7 +231,7 @@ function listPopularAudio() {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt="" style=" height:190px !important;"  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+				                                    <img alt=""  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
 														.files[0].filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
@@ -230,7 +242,7 @@ function listPopularAudio() {
 						audios += `<div class="post-item-description">`;
 						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
 						$(value.tags).each(function(i, v) {
-							audios += `<span class="post-meta-category"><i class="fa fa-tag"></i>${v}</span>`;
+							audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
 						});
 						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
 						audios += `<div class="post-author">
@@ -266,6 +278,50 @@ function listPopularAudio() {
 			$('#blogy').html(`<h5 style="color:red"> Error Fetching Result</h5>`);
 			$('#audioLoader').hide();
 			$('#blogy').show();
+		},
+	});
+}
+
+function listTags() {
+	var token1 = localStorage.getItem('token');
+	var page_limit = 500;
+	$('#fTag').hide();
+	$('#tagOptLoader').show();
+
+	$.ajax({
+		type: 'GET',
+		dataType: 'json',
+		cache: false,
+		url: `https://streaming-audio-library.herokuapp.com/api/v1/admin/view_tags/1/${page_limit}`,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			// Authorization: token1,
+		},
+
+		success: function(res) {
+			function toTitleCase(str) {
+				return str.replace(/\w\S*/g, function(txt) {
+					return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+				});
+			}
+
+			var options = '';
+
+			$(res.tagsrecords).each(function(i, v) {
+				options += `<option value="${v.tag_name}">${toTitleCase(v.tag_name)}</option>`;
+			});
+
+			$('#fTag').append(options);
+			$('#tagOptLoader').hide();
+			$('#fTag').show();
+		},
+		// jqXHR, textStatus, errorThrown
+		error(response) {
+			console.log(response);
+			$('#fTag').append(`<option value="">Error Loading result!!</option>`);
+			$('#tagOptLoader').hide();
+			$('#fTag').show();
 		},
 	});
 }
