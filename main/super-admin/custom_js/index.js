@@ -62,7 +62,7 @@ function login_user() {
 				localStorage.setItem('user_sm', result.user._id);
 				setTimeout(() => {
 					window.location.href =
-						'https://www.lovesense.online/main/super-admin/dashboard.html';
+						'https://www.kdaudiolibrary.com/super-admin/dashboard.html';
 				}, 2000);
 				// checkLoggedin();
 			} else {

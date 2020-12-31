@@ -51,6 +51,17 @@ function isEmptyInput(first) {
 	}
 }
 
+function titleCase(str) {
+	var splitStr = str.toLowerCase().split(' ');
+	for (var i = 0; i < splitStr.length; i++) {
+		// You do not need to check if i is larger than splitStr length, as your for does that for you
+		// Assign it back to the array
+		splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+	}
+	// Directly return the joined string
+	return splitStr.join(' ');
+}
+
 function listAudios(page) {
 	var token1 = localStorage.getItem('token');
 	var page_limit = 10;
@@ -289,8 +300,8 @@ function editAudio() {
 	let alltagArr = tagArr.map((item, index) => ({ tag_name: item, tag_color: tagy[index] }));
 
 	let data = {
-		title: $('#audioTitle').val(),
-		author: $('#audioAuthor').val(),
+		title: titleCase($('#audioTitle').val()),
+		author: titleCase($('#audioAuthor').val()),
 		date: $('#audioDate').val(),
 		description: $('#audioDesc').val(),
 		tags: alltagArr,
