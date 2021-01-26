@@ -61,7 +61,7 @@ function login_user() {
 				localStorage.setItem('user_phone', result.user.phone_number);
 				localStorage.setItem('user_sm', result.user._id);
 				setTimeout(() => {
-					window.location.href = 'https://www.lovesense.online/main/admin/dashboard.html';
+					window.location.href = `https://www.kdaudiolibrary.com/admin/dashboard.html`;
 				}, 2000);
 				// checkLoggedin();
 			} else {

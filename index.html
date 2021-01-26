@@ -137,7 +137,8 @@
                             treat people through a
                             relaxed virtual dialog talk therapy<br>
                             <b>PLEASE NOTE: We are NOT a medical or psychiatric clinic and do NOT provide clinical
-                                services</b>.</p>
+                                services</b>.
+                        </p>
                         <!-- <a href="#services" class="btn btn-dark btn-outline btn-rounded">Our Services</a> -->
                     </div>
                     <div class="col-lg-6 m-b-60">
@@ -345,8 +346,10 @@
                         <button class="btn btn-block" type="submit" id="book_appointment"><i
                                 class="fa fa-paper-plane"></i>&nbsp;BOOK
                             NOW</button>
-                        <button class="btn btn-block" type="submit" id="make_payment"><i class="fa fa-money-check-alt"
-                                style="display:none;"></i>&nbsp;Make Payment</button>
+                        <a class="btn btn-block" href="https://flutterwave.com/pay/icabcxjgsuw7" target="_blank"
+                            id="make_payment"><i class="fa fa-money-check-alt" style="display:none;"></i>&nbsp;Make
+                            Payment</a>
+
                         <button class="btn btn-primary" type="button" disabled="" id="spinMe2" style="display: none;">
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
@@ -451,7 +454,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-b" data-dismiss="modal">Close</button>
-                        <button type="button" id="make_payment2" class="btn btn-b">Proceed to Payment</button>
+                        <a href="https://flutterwave.com/pay/icabcxjgsuw7" target="_blank" id="make_payment2y"
+                            class="btn btn-b">Proceed
+                            to Payment</a>
                     </div>
                 </div>
             </div>
@@ -473,9 +478,11 @@
                             </div>
                             <h3>Working Days</h3>
                             <p><strong>Monday - Friday</strong>
-                                <br>24hrs</p>
+                                <br>24hrs
+                            </p>
                             <p><strong>Saturday - Sunday</strong>
-                                <br>24hrs</p>
+                                <br>24hrs
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -527,7 +534,8 @@
                     <div class="col-lg-6">
                         <div class="copyright-text text-center">©
                             <script>document.write(new Date().getFullYear())</script> Love-Sense. All Rights Reserved <a
-                                href="#">PoeInternational</a> </div>
+                                href="#">PoeInternational</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -576,9 +584,9 @@
             // $('#txtDate').attr('min', maxDate);
             $('#book_date').attr('min', maxDate);
 
-            $('#make_payment').click(function () {
-                makePayment()
-            })
+            // $('#make_payment').click(function () {
+            //     makePayment()
+            // })
 
             $('#make_payment2').click(function () {
                 makePayment()
@@ -765,18 +773,20 @@
             })
         }
 
-        let Famount = localStorage.getItem("price");
-        let Ffname = localStorage.getItem("first_name");
-        let Flname = localStorage.getItem("last_name");
-        let Femail = localStorage.getItem("email");
-        let Fservice = localStorage.getItem("service");
-        let Fphoness = localStorage.getItem("phones");
-        let fullname = Ffname + " " + Flname;
+
 
 
         function makePayment() {
+            let Famount = localStorage.getItem("price");
+            let Ffname = localStorage.getItem("first_name");
+            let Flname = localStorage.getItem("last_name");
+            let Femail = localStorage.getItem("email");
+            let Fservice = localStorage.getItem("service");
+            let Fphoness = localStorage.getItem("phones");
+            let fullname = Ffname + " " + Flname;
+
             FlutterwaveCheckout({
-                public_key: "FLWPUBK-4bd63d46d33f2c1b461f1f5384876185-X",
+                public_key: "FLWPUBK-98cb379fa4bab657de583bf5c16c7a91-X",
                 tx_ref: '' + Math.floor(Math.random() * 1000000000 + 1),
                 amount: 0.1,
                 currency: "GHS",

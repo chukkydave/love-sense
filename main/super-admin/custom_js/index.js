@@ -43,7 +43,7 @@ function login_user() {
 		dataType: 'json',
 		data: JSON.stringify(dataD),
 		cache: false,
-		url: 'https://streaming-audio-library.herokuapp.com/api/v1/super_admin/login',
+		url: 'https://api.kdaudiolibrary.com/api/v1/super_admin/login',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',

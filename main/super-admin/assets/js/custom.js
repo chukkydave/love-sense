@@ -12,7 +12,7 @@ $(document).ready(function() {
 });
 
 ('use strict');
-var apiPaths = 'https://streaming-audio-library.herokuapp.com/api/v1/';
+var apiPaths = 'https://api.kdaudiolibrary.com/api/v1/';
 var myHome = 'https://www.kdaudiolibrary.com/super-admin/index.html';
 
 // love-sense

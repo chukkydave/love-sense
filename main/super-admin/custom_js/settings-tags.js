@@ -112,6 +112,12 @@ function listTags(page) {
 					$('#tag_body').html(tag_table);
 					$('#tagLoader').hide();
 					$('#tagTable').show();
+				} else {
+					$('#tag_body').html(
+						`<tr class="even"> <td class=" " colspan="3">No tag records available</td></tr>`,
+					);
+					$('#tagLoader').hide();
+					$('#tagTable').show();
 				}
 
 				if (res.totalPages) {

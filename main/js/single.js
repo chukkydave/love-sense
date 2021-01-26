@@ -1,3 +1,4 @@
+const apiT = 'https://api.kdaudiolibrary.com/api/v1/';
 $(document).ready(function() {
 	listSingleAudio();
 	listRecentAudio();
@@ -13,7 +14,7 @@ function listSingleAudio() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/view_file/${audioId}`,
+		url: `${apiT}view_file/${audioId}`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -32,13 +33,15 @@ function listSingleAudio() {
                                 <div class="post-item-wrap">
                                     <div class="post-audio">
                                         <a href="#">
-                                            <img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res
-												.result.files[0].filename}/${res.result.file_id}">
-                                        </a>
-                                        <audio class="video-js vjs-default-skin" controls controlsList="nodownload" preload="false" data-setup="{}">
-                                            <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${res
-												.result.files[1].filename}/${res.result.file_id}" />
-                                        </audio>
+                                            <img alt="" src="${apiT}/file/${res.result.files[0]
+						.filename}/${res.result.file_id}">
+										</a>
+										
+                                        <audio class="video-js vjs-default-skin" controls controlsList="nodownload" id="audiom" preload="false" data-setup="{}">
+                                            <source src="${apiT}file/${res.result.files[1]
+						.filename}/${res.result.file_id}" />
+										</audio>
+										<button onClick="forwardAudio()">fastforward</button>
                                         
                                         
                                     </div>
@@ -61,8 +64,8 @@ function listSingleAudio() {
                                         </div>
 
                                         </div>
-                                    <form method="get" action="https://streaming-audio-library.herokuapp.com/api/v1/download/${res
-										.result.files[1].filename}/${res.result.file_id}">
+                                    <form method="get" action="${apiT}download/${res.result.files[1]
+						.filename}/${res.result.file_id}">
                                     
                                         <button class="btn btn-outline" type="submit"><i class="fa fa-download"></i>  Download!</button>
                                             </form>
@@ -89,6 +92,19 @@ function listSingleAudio() {
 	});
 }
 
+function forwardAudio() {
+	// Check for audio element support.
+	if (window.HTMLAudioElement) {
+		try {
+			var oAudio = document.getElementById('audiom');
+			oAudio.currentTime += 30.0;
+		} catch (e) {
+			// Fail silently but show in F12 developer tools console
+			if (window.console && console.error('Error:' + e));
+		}
+	}
+}
+
 function listRecentAudio() {
 	var token1 = localStorage.getItem('token');
 
@@ -98,7 +114,7 @@ function listRecentAudio() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_recent`,
+		url: `${apiT}most_recent`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -112,8 +128,7 @@ function listRecentAudio() {
 					$(res.count).each(function(i, v) {
 						let theDate = moment(v.files[0].uploadDate).fromNow();
 						audio += `<div class="post-thumbnail-entry">
-								<img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${v.files[0]
-									.filename}/${v.file_id}">
+								<img alt="" src="${apiT}file/${v.files[0].filename}/${v.file_id}">
 								<div class="post-thumbnail-content">
 									<a href="single.html?${v.file_id}">${v.title}</a>
 									<span class="post-date"><i class="icon-clock"></i> ${theDate}</span>`;
@@ -155,7 +170,7 @@ function listPopularAudio() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_stream`,
+		url: `${apiT}most_stream`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -169,8 +184,7 @@ function listPopularAudio() {
 					$(res.count).each(function(i, v) {
 						let theDate = moment(v.files[0].uploadDate).fromNow();
 						audio += `<div class="post-thumbnail-entry">
-								<img alt="" src="https://streaming-audio-library.herokuapp.com/api/v1/file/${v.files[0]
-									.filename}/${v.file_id}">
+								<img alt="" src="${apiT}file/${v.files[0].filename}/${v.file_id}">
 								<div class="post-thumbnail-content">
 									<a href="single.html?${v.file_id}">${v.title}</a>
 									<span class="post-date"><i class="icon-clock"></i> ${theDate}</span>`;

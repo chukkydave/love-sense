@@ -1,3 +1,4 @@
+const apiT = 'https://api.kdaudiolibrary.com/api/v1/';
 $(document).ready(function() {
 	listAllAudios(1);
 	listTags();
@@ -53,7 +54,7 @@ function listAllAudios(page) {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/all_files/${page}/${page_limit}?author=${authoy}&title=${titley}&date=${datey}&tag_name=${tagy}`,
+		url: `${apiT}all_files/${page}/${page_limit}?author=${authoy}&title=${titley}&date=${datey}&tag_name=${tagy}`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -77,8 +78,8 @@ function listAllAudios(page) {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt=""   src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
-														.files[0].filename}/${value.file_id}">
+				                                    <img alt=""   src="${apiT}file/${value.files[0]
+							.filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
 						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
@@ -151,7 +152,7 @@ function listRecentAudio() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_recent`,
+		url: `${apiT}most_recent`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -170,8 +171,8 @@ function listRecentAudio() {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt=""  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
-														.files[0].filename}/${value.file_id}">
+				                                    <img alt=""  src="${apiT}file/${value.files[0]
+							.filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
 						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
@@ -232,7 +233,7 @@ function listPopularAudio() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/most_stream`,
+		url: `${apiT}most_stream`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',
@@ -251,8 +252,8 @@ function listPopularAudio() {
 						audios += `<div class="post-item-wrap">`;
 						audios += `<div class="post-audio">`;
 						audios += `<a href="single.html?${value.file_id}">
-				                                    <img alt=""  src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
-														.files[0].filename}/${value.file_id}">
+				                                    <img alt=""  src="${apiT}file/${value.files[0]
+							.filename}/${value.file_id}">
 				                                </a>`;
 						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
 						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
@@ -312,7 +313,7 @@ function listTags() {
 		type: 'GET',
 		dataType: 'json',
 		cache: false,
-		url: `https://streaming-audio-library.herokuapp.com/api/v1/admin/view_tags/1/${page_limit}`,
+		url: `${apiT}admin/view_tags/1/${page_limit}`,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json',

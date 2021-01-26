@@ -56,6 +56,9 @@ function titleCase(str) {
 function createPost() {
 	$('#postBtn').hide();
 	$('#postLoader').show();
+	$('#uploadStatus').html('');
+	$('.progress-bar').css('background-color', '#6777ef');
+	$('#progressArea').show();
 
 	let date = $('#postDate').val();
 	let author = titleCase($('#postAuthor').val());
@@ -102,11 +105,30 @@ function createPost() {
 
 	//using AJAX to make the submit call
 	$.ajax({
+		xhr: function() {
+			var xhr = new window.XMLHttpRequest();
+			xhr.upload.addEventListener(
+				'progress',
+				function(evt) {
+					if (evt.lengthComputable) {
+						var percentComplete = evt.loaded / evt.total * 100;
+						$('.progress-bar').width(Math.round(percentComplete) + '%');
+						$('.progress-bar').html(Math.round(percentComplete) + '%');
+					}
+				},
+				false,
+			);
+			return xhr;
+		},
 		type: 'POST',
 		dataType: 'json',
 		cache: false,
 		url: `${apiPaths}upload_file`,
 		processData: false,
+		beforeSend: function() {
+			$('.progress-bar').width('0%');
+			// $('#uploadStatus').html('<i class="fa fa-3x fa-spin fa-spinner"></i>');
+		},
 		contentType: false,
 		headers: {
 			enctype: 'multipart/form-data',
@@ -116,11 +138,13 @@ function createPost() {
 
 		success: (res) => {
 			if (res.status == 201 || res.status == 200) {
+				$('.progress-bar').css('background-color', 'green');
 				alert('Succesful');
 				$('#postLoader').hide();
 				$('#postBtn').show();
 				$('.required_po').val('');
-				window.location.reload;
+				$('#audioImg').attr('src', '');
+				window.location.reload();
 				// $('#createTagLoader').hide();
 				// $('#createTagBtn').show();
 				// $('#tag_name').val('');
@@ -139,6 +163,10 @@ function createPost() {
 			alert(res.responseText);
 			$('#postLoader').hide();
 			$('#postBtn').show();
+			$('#uploadStatus').html(
+				'<p style="color:#EA4335;">File upload failed, please try again.</p>',
+			);
+			$('.progress-bar').css('background-color', 'red');
 			// $('#createTagLoader').hide();
 			// $('#createTagBtn').show();
 		},

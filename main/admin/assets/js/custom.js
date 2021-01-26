@@ -12,10 +12,9 @@ $(document).ready(function() {
 });
 
 ('use strict');
-var apiPaths = 'https://streaming-audio-library.herokuapp.com/api/v1/';
-var myHome = 'https://www.lovesense.online/main/admin/index.html';
-
-// love-sense
+const apiPaths = 'https://streaming-audio-library.herokuapp.com/api/v1/';
+const homely = 'https://www.kdaudiolibrary.com/admin';
+const myHome = `${homely}/index.html`;
 
 let namey = localStorage.getItem('user_name');
 let emaily = localStorage.getItem('user_email');

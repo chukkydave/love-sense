@@ -88,6 +88,12 @@ function listAdmins(page) {
 					$('#admin_body').html(contact_table);
 					$('#adminModal').hide();
 					$('#adminTable').show();
+				} else {
+					$('#admin_body').html(
+						`<tr class="even"> <td class=" " colspan="4">No admin record found</td></tr>`,
+					);
+					$('#adminModal').hide();
+					$('#adminTable').show();
 				}
 
 				if (res.totalPages) {
