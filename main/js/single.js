@@ -1,4 +1,6 @@
 const apiT = 'https://api.kdaudiolibrary.com/api/v1/';
+
+// https://streaming-audio-library.herokuapp.com/api/v1/
 $(document).ready(function() {
 	listSingleAudio();
 	listRecentAudio();
@@ -37,11 +39,11 @@ function listSingleAudio() {
 						.filename}/${res.result.file_id}">
 										</a>
 										
-                                        <audio class="video-js vjs-default-skin" controls controlsList="nodownload" id="audiom" preload="false" data-setup="{}">
+                                        <!--<audio class="video-js vjs-default-skin" controls controlsList="nodownload" id="audiom" preload="false" data-setup="{}">
                                             <source src="${apiT}file/${res.result.files[1]
 						.filename}/${res.result.file_id}" />
-										</audio>
-										<button onClick="forwardAudio()">fastforward</button>
+										</audio>-->
+										
                                         
                                         
                                     </div>

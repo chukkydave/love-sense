@@ -42,7 +42,7 @@ function listAllAudios(page) {
 	let tagy = $('#fTag').val();
 
 	console.log(authoy, titley);
-
+	// https://streaming-audio-library.herokuapp.com/api/v1/file/ad6c9d63df94d8509d74da9d590bfd0e.png/5fd72d3377f33e002c9201dc
 	let data = {
 		author: decodeURIComponent(authoy),
 		title: decodeURIComponent(titley),
@@ -63,57 +63,116 @@ function listAllAudios(page) {
 		// data: data,
 		success: (res) => {
 			if (res.status == 200) {
-				if (res.records.length > 0) {
-					let audios = '';
-					if (page == 1 || page == '') {
-						var k = 1;
-					} else {
-						var k = page * page_limit - page_limit + 1;
-					}
-					$(res.records).each((index, value) => {
-						let thisId = value.file_id;
-						let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
+				if (res.result) {
+					if (res.result.length > 0) {
+						let audios = '';
+						if (page == 1 || page == '') {
+							var k = 1;
+						} else {
+							var k = page * page_limit - page_limit + 1;
+						}
+						$(res.result).each((index, value) => {
+							let thisId = value.file_id;
+							let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
 
-						audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
-						audios += `<div class="post-item-wrap">`;
-						audios += `<div class="post-audio">`;
-						audios += `<a href="single.html?${value.file_id}">
+							audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
+							audios += `<div class="post-item-wrap">`;
+							audios += `<div class="post-audio">`;
+							audios += `<a href="single.html?${value.file_id}">
 				                                    <img alt=""   src="${apiT}file/${value.files[0]
-							.filename}/${value.file_id}">
+								.filename}/${value.file_id}">
 				                                </a>`;
-						// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
-						//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
-						// 								.files[1].filename}" />
-						//                         </audio>`;
-						audios += `</div>`;
-						audios += `<div class="post-item-description">`;
-						audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
-						$(value.tags).each(function(i, v) {
-							audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
-						});
-						audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
-						audios += `<div class="post-author">
+							// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
+							//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+							// 								.files[1].filename}" />
+							//                         </audio>`;
+							audios += `</div>`;
+							audios += `<div class="post-item-description">`;
+							audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
+							$(value.tags).each(function(i, v) {
+								audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
+							});
+							audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
+							audios += `<div class="post-author">
 				                                    <p>by ${value.author}</p>
 				                                </div>`;
-						audios += `</div>`;
-						audios += `</div>`;
-						audios += `</div>`;
-					});
+							audios += `</div>`;
+							audios += `</div>`;
+							audios += `</div>`;
+						});
 
-					k++;
+						k++;
 
-					$('#blogy').html(audios);
-					// $(window).load(function() {
-					// alert('hello');
-					// });
+						$('#blogy').html(audios);
+						// $(window).load(function() {
+						// alert('hello');
+						// });
 
-					$('#audioLoader').hide();
-					$('#blogy').show();
-				} else {
-					console.log(res);
-					$('#blogy').html(`<h5 style="color:red"> No audio message record found</h5>`);
-					$('#audioLoader').hide();
-					$('#blogy').show();
+						$('#audioLoader').hide();
+						$('#blogy').show();
+					} else {
+						console.log(res);
+						$('#blogy').html(
+							`<h5 style="color:red"> No audio message record found</h5>`,
+						);
+						$('#audioLoader').hide();
+						$('#blogy').show();
+					}
+				} else if (res.records) {
+					if (res.records.length > 0) {
+						let audios = '';
+						if (page == 1 || page == '') {
+							var k = 1;
+						} else {
+							var k = page * page_limit - page_limit + 1;
+						}
+						$(res.records).each((index, value) => {
+							let thisId = value.file_id;
+							let audioDate = moment(value.date, 'YYYY-MM-DD').format('ll');
+
+							audios += `<div class="post-item border grey-bg col-xl-3 col-lg-4 col-md-6 col-sm-12" >`;
+							audios += `<div class="post-item-wrap">`;
+							audios += `<div class="post-audio">`;
+							audios += `<a href="single.html?${value.file_id}">
+				                                    <img alt=""   src="${apiT}file/${value.files[0]
+								.filename}/${value.file_id}">
+				                                </a>`;
+							// audios += `<audio class="video-js vjs-default-skin" controls preload="true" data-setup="{}">
+							//                             <source src="https://streaming-audio-library.herokuapp.com/api/v1/file/${value
+							// 								.files[1].filename}" />
+							//                         </audio>`;
+							audios += `</div>`;
+							audios += `<div class="post-item-description">`;
+							audios += `<span class="post-meta-date"><i class="fa fa-calendar" style="margin-top:15px;"></i>${audioDate}</span>`;
+							$(value.tags).each(function(i, v) {
+								audios += `<span class="post-meta-category"><i class="fa fa-tag" style="color:${v.tag_color}"></i>${v.tag_name}</span>`;
+							});
+							audios += `<h2><a href="single.html?${value.file_id}">${value.title}</a></h2>`;
+							audios += `<div class="post-author">
+				                                    <p>by ${value.author}</p>
+				                                </div>`;
+							audios += `</div>`;
+							audios += `</div>`;
+							audios += `</div>`;
+						});
+
+						k++;
+
+						$('#blogy').html(audios);
+						// $(window).load(function() {
+						// alert('hello');
+						// });
+
+						$('#audioLoader').hide();
+						$('#blogy').show();
+					} else {
+						console.log(res);
+						$('#blogy').html(
+							`<h5 style="color:red"> No audio message record found</h5>`,
+						);
+						$('#audioLoader').hide();
+						$('#blogy').show();
+					}
 				}
 
 				if (res.totalPages) {
