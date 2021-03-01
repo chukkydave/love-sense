@@ -454,9 +454,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-b" data-dismiss="modal">Close</button>
-                        <a href="https://flutterwave.com/pay/icabcxjgsuw7" target="_blank" id="make_payment2y"
-                            class="btn btn-b">Proceed
+                        <a id="make_payment2" class="btn btn-b">Proceed
                             to Payment</a>
+                        <!-- <a href="https://flutterwave.com/pay/icabcxjgsuw7" target="_blank" id="make_payment2y"
+                            class="btn btn-b">Proceed
+                            to Payment</a> -->
                     </div>
                 </div>
             </div>
@@ -543,13 +545,16 @@
     </footer>
 
     <a id="scrollTop"><i class="icon-chevron-up"></i><i class="icon-chevron-up"></i></a>
-
+    <script async data-id="74527" src="https://cdn.widgetwhats.com/script.min.js"></script>
+    <script src="https://openexchangerates.github.io/money.js/money.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/plugins.js"></script>
 
     <script src="js/functions.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
     <script type="text/javascript">
+        let convAmount
+        let convCurrency
         $(document).ready(function () {
             $('#make_payment').hide()
             localStorage.removeItem("name")
@@ -592,7 +597,35 @@
                 makePayment()
             })
 
+
+
+
+
+
+
         })
+
+
+        async function fetchJson(url) {
+            let res = await fetch(url);
+            return await res.json();
+        }
+
+        (async function () {
+            // all of our JavaScript code here
+            const openEx = '6c1b07a00deb496391f7756a57e8dc36'
+            const ipData = '0b7d9046894cb960e5ed3d429b1de35bde53af7af9e410f94850913c'
+            let location = await fetchJson(`https://api.ipdata.co?api-key=${ipData}&fields=currency`);
+            let exchange = await fetchJson(`https://openexchangerates.org/api/latest.json?app_id=${openEx}`);
+
+            fx.base = exchange.base;
+            fx.rates = exchange.rates;
+            console.log(fx(50).from('GHS').to(location.currency.code).toFixed(2));
+            convAmount = fx(50).from('GHS').to(location.currency.code).toFixed(2)
+            convCurrency = location.currency.code
+            console.log(location.currency.code)
+            // console.log(location, exchange)
+        })();
 
         function isEmptyInput(first) {
             let isEmpty = false;
@@ -784,13 +817,26 @@
             let Fservice = localStorage.getItem("service");
             let Fphoness = localStorage.getItem("phones");
             let fullname = Ffname + " " + Flname;
+            let finalAmt
+            let finalCur
+
+            if (convCurrency == undefined || convCurrency == null || convCurrency == '') {
+                finalCur = "GHS"
+            } else {
+                finalCur = convCurrency
+            }
+            if (convAmount == undefined || convAmount == null || convAmount == '') {
+                finalAmt = 50
+            } else {
+                finalAmt = convAmount
+            }
 
             FlutterwaveCheckout({
                 public_key: "FLWPUBK-98cb379fa4bab657de583bf5c16c7a91-X",
                 tx_ref: '' + Math.floor(Math.random() * 1000000000 + 1),
-                amount: 0.1,
-                currency: "GHS",
-                country: "GH",
+                amount: finalAmt,
+                currency: finalCur,
+                // country: "GH",
                 payment_options: "card, mobilemoneyghana, ussd",
                 redirect_url: // specified redirect URL
                     "https://www.lovesense.online",
