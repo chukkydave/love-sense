@@ -310,7 +310,7 @@
 
                         <div class="form-group m-b-5">
                             <label>Price</label>
-                            <input disabled type="text" value="GH₵50" aria-required="true" name=""
+                            <input disabled type="text" id="book_price" value="GH₵50" aria-required="true" name=""
                                 class="form-control form-control-sm">
                         </div>
 
@@ -624,6 +624,7 @@
             convAmount = fx(50).from('GHS').to(location.currency.code).toFixed(2)
             convCurrency = location.currency.code
             console.log(location.currency.code)
+            $('#book_price').val(`${location.currency.symbol}${fx(50).from('GHS').to(location.currency.code).toFixed(2)}`)
             // console.log(location, exchange)
         })();
 
