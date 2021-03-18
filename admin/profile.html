@@ -284,12 +284,12 @@
                               <div class="form-group col-md-4 col-12">
                                 <label>Old Password</label>
                                 <input type="password" id="oldPw" class="form-control required_f" value="">
-                                
+
                               </div>
                               <div class="form-group col-md-4 col-12">
                                 <label>New-Password</label>
                                 <input type="password" class="form-control required_f" id="newPw" value="">
-                                
+
                               </div>
                               <!-- <div class="form-group col-md-4 col-12">
                                 <label>Phone</label>
@@ -337,9 +337,9 @@
     $(document).ready(function () {
       checkLoggedin();
       $("#changePw").on("click", function () {
-          if (isEmptyInput('.required_f')) {
-              changePassword();
-          }
+        if (isEmptyInput('.required_f')) {
+          changePassword();
+        }
       })
     })
     function checkLoggedin() {
@@ -356,86 +356,87 @@
     $('#myEmail').html(profileEmail);
 
     function isEmptyInput(first) {
-        let isEmpty = false;
-        $(first).each(function () {
-            var input = $.trim($(this).val());
-            if (input.length === 0 || input === "0") {
-                $(this).addClass('has-error');
-            isEmpty = true;
+      let isEmpty = false;
+      $(first).each(function () {
+        var input = $.trim($(this).val());
+        if (input.length === 0 || input === "0") {
+          $(this).addClass('has-error');
+          isEmpty = true;
 
         } else {
-            $(this).removeClass("has-error");
-            
+          $(this).removeClass("has-error");
+
         }
 
       });
-        if (isEmpty === true) { return false; }
-        else { return true }
+      if (isEmpty === true) { return false; }
+      else { return true }
 
     }
 
     function changePassword() {
-        $('#changePw').hide()
-        $('#change_pw_modal').show()
-        //declaring variable using the ES6 let
-        let oldPw = $('#oldPw').val();
-        let newPw = $('#newPw').val();
+      $('#changePw').hide()
+      $('#change_pw_modal').show()
+      //declaring variable using the ES6 let
+      let oldPw = $('#oldPw').val();
+      let newPw = $('#newPw').val();
 
 
-        // using the ES6 const variable to hold the url to the api path
-        const URL = `${apiPaths}user/change-password`;
-        //storing the variable in a data variable to be an object as Displayed in the PAYLOAD
+      // using the ES6 const variable to hold the url to the api path
+      const URL = `${apiPaths}user/change-password`;
+      //storing the variable in a data variable to be an object as Displayed in the PAYLOAD
 
 
-        let data = {
-            "password": oldPw,
-            "new_password": newPw,
+      let data = {
+        "password": oldPw,
+        "new_password": newPw,
+      }
+      console.log(data)
+
+      var token1 = localStorage.getItem('token')
+
+      //using AJAX to make the submit call
+      $.ajax({
+        type: 'PATCH',
+        dataType: 'json',
+        cache: false,
+        url: URL,
+        headers: {
+          // 'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': token1
+        },
+        data: JSON.stringify(data),
+        success: (res) => {
+          // alert(res.status)
+          if (res.status == 201 || res.status == 200) {
+            alert("Succesful");
+            $('#change_pw_modal').hide()
+            $('#changePw').show()
+            window.location.reload;
+
+          }
+          else {
+            alert('Error!!');
+            $('#change_pw_modal').hide()
+            $('#changePw').show()
+
+          }
+
+
+        },
+        error: (res) => {
+
+          alert(res.responseText);
+          $('#change_pw_modal').hide()
+          $('#changePw').show()
         }
-        console.log(data)
-
-        var token1 = localStorage.getItem('token')
-
-        //using AJAX to make the submit call
-        $.ajax({
-            type: 'PATCH',
-            dataType: 'json',
-            cache: false,
-            url: URL,
-            headers: {
-                // 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': token1
-            },
-            data: JSON.stringify(data),
-            success: (res) => {
-                // alert(res.status)
-                if (res.status == 201 || res.status == 200) {
-                    alert("Succesful");
-                    $('#change_pw_modal').hide()
-                    $('#changePw').show()
-                    window.location.reload;
-                    
-                }
-                else {
-                    alert('Error!!');
-                    $('#change_pw_modal').hide()
-                    $('#changePw').show()
-
-                }
-                
-
-            },
-            error: (res) => {
-
-                alert(res.responseText);
-                $('#change_pw_modal').hide()
-                $('#changePw').show()
-            }
 
 
-        })
+      })
     }
   </script>
+  <script src="../general.js"></script>
 </body>
 
 

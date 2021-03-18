@@ -550,18 +550,15 @@
     <script src="https://openexchangerates.github.io/money.js/money.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/plugins.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+
     <script src="js/functions.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-
-    <script src="general.js"></script>
     <script type="text/javascript">
         let convAmount
         let convCurrency
         $(document).ready(function () {
 
-            var socket = io.connect('https://love-sense.herokuapp.com/', { 'forceNew': true });
+            var socket = io.connect('https://localhost:3000', { 'forceNew': true });
             socket.on('connect', function () {
                 console.log('connected!')
                 socket.emit('message', 'Hi There!')
@@ -830,11 +827,71 @@
 
 
 
+        function makePayment() {
+            let Famount = localStorage.getItem("price");
+            let Ffname = localStorage.getItem("first_name");
+            let Flname = localStorage.getItem("last_name");
+            let Femail = localStorage.getItem("email");
+            let Fservice = localStorage.getItem("service");
+            let Fphoness = localStorage.getItem("phones");
+            let fullname = Ffname + " " + Flname;
+            let finalAmt
+            let finalCur
 
+            if (convCurrency == undefined || convCurrency == null || convCurrency == '') {
+                finalCur = "GHS"
+            } else {
+                finalCur = convCurrency
+            }
+            if (convAmount == undefined || convAmount == null || convAmount == '') {
+                finalAmt = 50
+            } else {
+                finalAmt = convAmount
+            }
+
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK-98cb379fa4bab657de583bf5c16c7a91-X",
+                tx_ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+                amount: finalAmt,
+                currency: finalCur,
+                // country: "GH",
+                payment_options: "card, mobilemoneyghana, ussd",
+                redirect_url: // specified redirect URL
+                    "https://www.lovesense.online",
+                meta: {
+                    consumer_id: 23,
+                    consumer_mac: "92a3-912ba-1192a",
+                },
+                customer: {
+                    email: Femail,
+                    phone_number: Fphoness,
+                    name: fullname,
+                },
+                callback: function (data) {
+                    console.log(data);
+                },
+                onclose: function () {
+                    // close modal
+                },
+                success: function () {
+                    var _id = localStorage.getItem("_id")
+                    socket.emit('successful_booking', {
+                        _id: _id
+                    });
+                    setTimeout(() => {
+                        localStorage.removeItem(_id)
+                    }, 1000);
+                },
+                customizations: {
+                    title: "Love Sense",
+                    description: Fservice,
+                    // logo: "https://myreohub.com/images/relt22.png",
+                },
+            });
+        }
 
 
     </script>
-
 </body>
 
 
