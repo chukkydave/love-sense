@@ -18,9 +18,88 @@
   <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
   <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
   <link rel="stylesheet" href="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+  <style>
+    #breathing-button {
+      /* width: 180px;
+      padding: 10px;
+      margin: 50px auto;
+      border: 1px solid #3cc8b4; */
+      -webkit-animation: breathing 2s ease-out infinite normal;
+      animation: breathing 2s ease-out infinite normal;
+      /* font-family:'Lantinghei SC';
+      font-size: 16px;
+      font-weight: bold;
+      background: #3cc8b4;
+      color: #fff; */
+      -webkit-font-smoothing: antialiased;
+      /* border-radius: 2px;
+      text-align: center;     */
+      position: fixed;
+      bottom: 0;
+      z-index: 999;
+      right: 0;
+      margin-bottom: 2em;
+      margin-right: 10px;
+      background-color: red;
+      border-color: red;
+      color: white;
+      /* display: none; */
+    }
+
+
+    @-webkit-keyframes breathing {
+      0% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      25% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+
+      60% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      100% {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+    }
+
+    @keyframes breathing {
+      0% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      25% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+      }
+
+      60% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      100% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <button class="btn" id="breathing-button">Enable
+    Notification</button>
   <div class="loader"></div>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
@@ -37,6 +116,28 @@
           <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
               <i data-feather="maximize"></i>
             </a></li>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+              class="nav-link nav-link-lg message-toggle"><i data-feather="bell" id="notification_icon" class=""></i>
+              <span class="badge headerBadge1" style="background: red; display: none;" id="notification_count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
+              <div class="dropdown-header">
+                Notifications
+                <!-- <div class="float-right">
+                              <a href="#">Mark All As Read</a>
+                            </div> -->
+              </div>
+              <div class="dropdown-list-content dropdown-list-message" id="notification_body">
+                <div class="dropdown-header">
+                  No Notifications
+
+                </div>
+              </div>
+              <!-- <div class="dropdown-footer text-center">
+                            <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                          </div> -->
+            </div>
+          </li>
 
 
           <li class="dropdown"><a href="#" data-toggle="dropdown"
@@ -256,6 +357,10 @@
   <script src="assets/bundles/jquery-selectric/jquery.selectric.min.js"></script>
   <script src="assets/bundles/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
   <script src="assets/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="assets/js/page/create-post.js"></script>
   <!-- Page Specific JS File -->
   <script src="assets/js/page/advance-table.js"></script>
@@ -266,6 +371,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"
     integrity="sha512-frFP3ZxLshB4CErXkPVEXnd5ingvYYtYhE5qllGdZmcOlRKNEPbufyupfdSTNmoF5ICaQNO6SenXzOZvoGkiIA=="
     crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+  <script src="../general.js"></script>
   <script>
     $('#filterNamey').on('keyup', function () {
       var value = $(this).val().toLowerCase();
@@ -319,7 +426,7 @@
               }
 
               $(res.adminrecords).each((index, value) => {
-                let datePro = moment(value.date, 'YYYY-MM-DD');
+                let datePro = moment(value.appointmentDate, 'YYYY-MM-DD');
                 let addedDate = datePro.format("MMM Do YYYY")
                 var time = value.time;
                 var formatted = moment(time, "HH:mm:ss").format("hh:mm A");
@@ -433,7 +540,7 @@
 
 
   </script>
-  <script src="../general.js"></script>
+
 </body>
 
 

@@ -173,42 +173,42 @@
                             24/7.</span>
                     </div>
                     <!-- <div style="background-color:#ad9979" class="col-lg-4">
-						<h1 class="text-lg text-uppercase">03.</h1>
-						<h3>TESTING</h3>
-						<span>The most happiest time of the day!. Morbi sagittis, sem quis lacinia faucibus, orci ipsum
-							gravida tortor,
-							vel interdum mi sapien ut justo. Nulla varius consequat magna, id molestie ipsum volutpat
-							quis.
-							A true
-							story, that never been told!. </span>
-					</div> -->
+                        <h1 class="text-lg text-uppercase">03.</h1>
+                        <h3>TESTING</h3>
+                        <span>The most happiest time of the day!. Morbi sagittis, sem quis lacinia faucibus, orci ipsum
+                            gravida tortor,
+                            vel interdum mi sapien ut justo. Nulla varius consequat magna, id molestie ipsum volutpat
+                            quis.
+                            A true
+                            story, that never been told!. </span>
+                    </div> -->
                 </div>
             </div>
 
             <!-- <div class="container">
-				<div class="container-fullscreen">
-					<div class="text-middle">
-						<div class="row">
-							<div class="col-lg-6 m-b-60">
-								<h1 class="text-medium">STATS</h1>
-								<p class="lead">The most happiest time of the day!. Morbi sagittis, sem quis lacinia
-									faucibus, orci ipsum gravida tortor, vel interdum mi sapien ut justo. Nulla varius
-									consequat magna, id molestie ipsum volutpat quis. A true story, that never been
-									told!. Fusce id mi diam, non ornare orci. Pellentesque ipsum erat, facilisis ut
-									venenatis eu, sodales vel dolor.
-								</p>
-								<a href="#" class="read-more"><span>Read more</span></a>
-							</div>
-							<div class="col-lg-6">
-								<img class="img-fluid " src="homepages/one-page-v2/images/1.png" alt="">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="text-center">
-					<a href="#section2" class="scroll-to"><i class="fa fa-chevron-down fa-2x"></i></a>
-				</div>
-			</div> -->
+                <div class="container-fullscreen">
+                    <div class="text-middle">
+                        <div class="row">
+                            <div class="col-lg-6 m-b-60">
+                                <h1 class="text-medium">STATS</h1>
+                                <p class="lead">The most happiest time of the day!. Morbi sagittis, sem quis lacinia
+                                    faucibus, orci ipsum gravida tortor, vel interdum mi sapien ut justo. Nulla varius
+                                    consequat magna, id molestie ipsum volutpat quis. A true story, that never been
+                                    told!. Fusce id mi diam, non ornare orci. Pellentesque ipsum erat, facilisis ut
+                                    venenatis eu, sodales vel dolor.
+                                </p>
+                                <a href="#" class="read-more"><span>Read more</span></a>
+                            </div>
+                            <div class="col-lg-6">
+                                <img class="img-fluid " src="homepages/one-page-v2/images/1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="#section2" class="scroll-to"><i class="fa fa-chevron-down fa-2x"></i></a>
+                </div>
+            </div> -->
         </section>
 
 
@@ -562,14 +562,16 @@
         $(document).ready(function () {
 
             var socket = io.connect('https://love-sense.herokuapp.com/', { 'forceNew': true });
+            // var socket = io.connect('http://localhost:8000/', { forceNew: true });
+
             socket.on('connect', function () {
                 console.log('connected!')
                 socket.emit('message', 'Hi There!')
             })
 
-            socket.emit('successful_booking', function (data) {
-                console.log(data)
-            });
+            // socket.emit('successful_booking', function (data) {
+            //     console.log(data)
+            // });
 
 
 
@@ -581,6 +583,7 @@
             localStorage.removeItem("service")
             localStorage.removeItem("price")
             localStorage.removeItem("phones")
+            localStorage.removeItem("resBookings")
             $("#process_contact").on("click", function () {
                 if (isEmptyInput('.required_f')) {
                     contactMe();
@@ -762,7 +765,7 @@
             let data = {
                 "first_name": firstName,
                 "last_name": lastName,
-                "date": date,
+                "appointmentDate": date,
                 "email": email,
                 "phone": phone,
                 "service": services,
@@ -794,6 +797,7 @@
                         $("#book_appointment").show()
                         $('#make_payment').show()
                         localStorage.setItem('_id', res.bookings._id)
+                        localStorage.setItem('resBookings', JSON.stringify(res.bookings))
                         // let msg = res.message
                         // $("#successMessage").html(res.message);
                         // $('#thanksModal').on('hidden.bs.modal', function () {
