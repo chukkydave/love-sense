@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 ('use strict');
 var apiPaths = 'https://love-sense.herokuapp.com/api/v1/';
-var myHome = 'https://www.lovesense.online/admin/index.html';
+var myHome = 'https://www.mylovesense.online/admin/index.html';
 
 // love-sense
 

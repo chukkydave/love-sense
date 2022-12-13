@@ -131,3 +131,14 @@ function makePayment() {
 function callSomething(data) {
 	console.log(data);
 }
+
+// {
+//     "name": "u103088961",
+//     "host": "access853146338.webspace-data.io",
+//     "protocol": "sftp",
+//     "port": 22,
+//     "username": "u103088961",
+//     "remotePath": "/.",
+//     "uploadOnSave": true,
+//     "password": "Love-sense101"
+// }

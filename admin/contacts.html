@@ -458,6 +458,8 @@
 
 
                     if (res.status == 200) {
+                        // alert(page)
+
                         if (res.adminrecords.length > 0) {
 
                             let contact_table = "";
@@ -504,6 +506,10 @@
                             $('#conModal').hide()
                             $('#conTable').show()
 
+                        } else {
+                            $('#contact_body').html(`<tr class="even"> <td class=" " colspan="4">No data available</td></tr>`);
+                            $('#conModal').hide()
+                            $('#conTable').show()
                         }
 
 
